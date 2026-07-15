@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { MobileFrame } from "@/components/mobile-frame";
+import { sendWelcomeEmail } from "@/server/mailer";
 import {
   Dialog,
   DialogContent,
@@ -67,6 +68,12 @@ function AuthScreen() {
       } else {
         setAllowSessionRedirect(false);
         const result = await store.signUpWithPassword(role, email, password);
+        try {
+          await sendWelcomeEmail({ data: { email: email } });
+        } catch (emailErr) {
+          console.error("Welcome email failed to send, but account was created.", emailErr);
+        }
+        // ----------------------
         if (result.session) {
           await store.signOut();
         }
