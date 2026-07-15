@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { MobileFrame } from "@/components/mobile-frame";
-import { sendWelcomeEmail } from "@/server/mailer";
+import { sendWelcomeEmail } from "@/lib/mailer";
 import {
   Dialog,
   DialogContent,
