@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as ClientRouteImport } from './routes/client'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -23,6 +24,11 @@ import { Route as ClientBookingsIndexRouteImport } from './routes/client.booking
 import { Route as ClientBookingsIdRouteImport } from './routes/client.bookings.$id'
 import { Route as AdminJobsIdRouteImport } from './routes/admin.jobs.$id'
 
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClientRoute = ClientRouteImport.update({
   id: '/client',
   path: '/client',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/client': typeof ClientRouteWithChildren
+  '/verify': typeof VerifyRoute
   '/admin/map': typeof AdminMapRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/client/book': typeof ClientBookRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/verify': typeof VerifyRoute
   '/admin/map': typeof AdminMapRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/client/book': typeof ClientBookRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/client': typeof ClientRouteWithChildren
+  '/verify': typeof VerifyRoute
   '/admin/map': typeof AdminMapRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/client/book': typeof ClientBookRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/client'
+    | '/verify'
     | '/admin/map'
     | '/admin/teams'
     | '/client/book'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/verify'
     | '/admin/map'
     | '/admin/teams'
     | '/client/book'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/client'
+    | '/verify'
     | '/admin/map'
     | '/admin/teams'
     | '/client/book'
@@ -184,10 +196,18 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   ClientRoute: typeof ClientRouteWithChildren
+  VerifyRoute: typeof VerifyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/client': {
       id: '/client'
       path: '/client'
@@ -322,6 +342,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   ClientRoute: ClientRouteWithChildren,
+  VerifyRoute: VerifyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

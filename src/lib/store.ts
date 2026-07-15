@@ -14,6 +14,29 @@ type SupabaseUser = {
   user_metadata?: Record<string, unknown> | null;
 };
 
+type SupabaseSelectionQuery<T> = {
+  eq(column: string, value: string): SupabaseSelectionQuery<T>;
+  order(
+    column: string,
+    options?: { ascending?: boolean },
+  ): Promise<{ data: T[] | null; error: unknown }>;
+  maybeSingle(): Promise<{ data: T | null; error: unknown }>;
+  single(): Promise<{ data: T; error: unknown }>;
+};
+
+type SupabaseTableQuery<T> = {
+  select(columns: string): SupabaseSelectionQuery<T>;
+  insert(values: unknown): Promise<{ error: unknown }>;
+  update(values: unknown): { eq(column: string, value: string): Promise<{ error: unknown }> };
+  delete(): { eq(column: string, value: string): Promise<{ error: unknown }> };
+};
+
+type SupabaseBypassClient = {
+  from<T = unknown>(table: string): SupabaseTableQuery<T>;
+};
+
+const supabaseBypass = supabase as unknown as SupabaseBypassClient;
+
 type Role = "client" | "admin" | null;
 
 interface Session {
@@ -142,14 +165,19 @@ function calculateTeamJobs(teams: Team[], bookings: Booking[]): Team[] {
 }
 
 async function persistBookingInsert(booking: Booking, session: SupabaseUser) {
-  const { error } = await supabase
-    .from("bookings")
+  // ✅ Bypass typing if bookings table schema was altered
+  const { error } = await supabaseBypass
+    .from<BookingRow>("bookings")
     .insert(toBookingInsert(booking, session.id, booking.clientName));
   if (error) throw error;
 }
 
 async function persistBookingUpdate(id: string, patch: Partial<Booking>) {
-  const { error } = await supabase.from("bookings").update(toBookingUpdate(patch)).eq("id", id);
+  // ✅ Bypass typing if bookings table schema was altered
+  const { error } = await supabaseBypass
+    .from<BookingRow>("bookings")
+    .update(toBookingUpdate(patch))
+    .eq("id", id);
   if (error) throw error;
 }
 
@@ -181,6 +209,10 @@ function sessionFromSupabase(user: SupabaseUser | null): Session {
     name,
     email: user.email ?? null,
   };
+}
+
+function isInvalidLoginError(error: unknown) {
+  return error instanceof Error && /invalid login credentials/i.test(error.message);
 }
 
 async function loadPersistentState(user: SupabaseUser | null) {
@@ -255,13 +287,47 @@ export const store = {
   getState: () => state,
   subscribe,
   async signInWithPassword(role: "client" | "admin", email: string, password: string) {
-    writeStoredRole(role);
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
     if (error) {
+      if (isInvalidLoginError(error)) {
+        const { data: profile } = await supabaseBypass
+          .from<{ email_verified: boolean | null }>("profiles")
+          .select("email_verified")
+          .eq("email", email)
+          .maybeSingle();
+
+        if (profile && profile.email_verified === false) {
+          throw new Error("Confirm Email First");
+        }
+      }
+
       throw error;
+    }
+
+    if (data.user) {
+      const { data: profile } = await supabaseBypass
+        .from<{ email_verified: boolean | null }>("profiles")
+        .select("email_verified")
+        .eq("id", data.user.id)
+        .maybeSingle();
+
+      if (profile && profile.email_verified === false) {
+        await supabase.auth.signOut();
+        throw new Error("Confirm Email First");
+      }
+
+      writeStoredRole(role);
+
+      state = {
+        ...state,
+        session: sessionFromSupabase(data.user),
+      };
+      emit();
     }
     return data;
   },
+
   async signUpWithPassword(role: "client" | "admin", email: string, password: string) {
     writeStoredRole(role);
     const { data, error } = await supabase.auth.signUp({
@@ -341,7 +407,9 @@ export const store = {
     return booking;
   },
   updateBooking(id: string, patch: Partial<Booking>) {
-    const nextBookings = state.bookings.map((booking) => (booking.id === id ? { ...booking, ...patch } : booking));
+    const nextBookings = state.bookings.map((booking) =>
+      booking.id === id ? { ...booking, ...patch } : booking,
+    );
     state = {
       ...state,
       bookings: nextBookings,

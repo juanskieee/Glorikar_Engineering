@@ -47,11 +47,23 @@ $$;
 
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT,
   full_name TEXT,
   phone TEXT,
+  email_verified BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
 );
+
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS email TEXT;
+
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS email_verified BOOLEAN NOT NULL DEFAULT false;
+
+CREATE UNIQUE INDEX IF NOT EXISTS profiles_email_key
+  ON public.profiles (email)
+  WHERE email IS NOT NULL;
 
 GRANT SELECT, INSERT, UPDATE ON public.profiles TO authenticated;
 GRANT ALL ON public.profiles TO service_role;
@@ -122,16 +134,20 @@ AS $$
 DECLARE
   user_role public.app_role;
 BEGIN
-  INSERT INTO public.profiles (id, full_name)
+  INSERT INTO public.profiles (id, email, full_name)
   VALUES (
     NEW.id,
+    NEW.email,
     COALESCE(
       NEW.raw_user_meta_data ->> 'full_name',
       NEW.raw_user_meta_data ->> 'name',
       split_part(COALESCE(NEW.email, ''), '@', 1)
     )
   )
-  ON CONFLICT (id) DO NOTHING;
+  ON CONFLICT (id) DO UPDATE
+    SET email = COALESCE(EXCLUDED.email, public.profiles.email),
+        full_name = EXCLUDED.full_name,
+        updated_at = now();
 
   BEGIN
     user_role := COALESCE((NEW.raw_user_meta_data ->> 'role')::public.app_role, 'client'::public.app_role);
@@ -204,6 +220,18 @@ BEGIN
   END IF;
 END
 $$;
+
+-- One-time verification tokens for the custom confirmation flow
+
+CREATE TABLE IF NOT EXISTS public.email_verifications (
+  token TEXT PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT NOT NULL,
+  expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+GRANT ALL ON public.email_verifications TO service_role;
 
 -- ---------------------------------------------------------------------------
 -- Teams
@@ -434,6 +462,7 @@ CREATE TRIGGER update_bookings_updated_at
 -- ---------------------------------------------------------------------------
 -- Seed data (optional — can be removed if you prefer to seed via the app)
 -- ---------------------------------------------------------------------------
+-- See `supabase/seed.sql` for Auth user seed data.
 
 INSERT INTO public.services (type, description, price, sort_order) VALUES
   ('General Service', 'Standard cleaning & check', 30, 1),

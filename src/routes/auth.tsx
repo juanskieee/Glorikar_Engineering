@@ -2,15 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { MobileFrame } from "@/components/mobile-frame";
-import { sendWelcomeEmail } from "@/lib/mailer";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { sendVerificationEmail } from "@/lib/mailer";
 import { Button } from "@/components/ui/button";
 import { store, useSession } from "@/lib/store";
 
@@ -28,33 +20,39 @@ function AuthScreen() {
   const [role, setRole] = useState<"client" | "admin">("client");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<null | "email" | "google" | "signup">(null);
-  const [registrationOpen, setRegistrationOpen] = useState(false);
   const [allowSessionRedirect, setAllowSessionRedirect] = useState(true);
+  const [registrationOpen, setRegistrationOpen] = useState(false);
+  const [signinOpen, setSigninOpen] = useState(false);
   const navigate = useNavigate();
   const session = useSession();
 
   useEffect(() => {
     if (role === "admin") {
       setScreen("signin");
-      setRegistrationOpen(false);
       setAllowSessionRedirect(true);
+      setRegistrationOpen(false);
+      setSigninOpen(false);
     }
   }, [role]);
+
+  useEffect(() => {
+    if (!signinOpen) return;
+    if (!session.role) return;
+
+    const timer = window.setTimeout(() => {
+      navigate({ to: session.role === "admin" ? "/admin" : "/client" });
+      setSigninOpen(false);
+      setAllowSessionRedirect(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timer);
+  }, [signinOpen, session.role, navigate]);
 
   useEffect(() => {
     if (!allowSessionRedirect) return;
     if (session.role === "admin") navigate({ to: "/admin" });
     else if (session.role === "client") navigate({ to: "/client" });
   }, [allowSessionRedirect, session.role, navigate]);
-
-  const goToSignin = () => {
-    setRegistrationOpen(false);
-    setScreen("signin");
-    setPassword("");
-    setShowPassword(false);
-    setError(null);
-    setAllowSessionRedirect(true);
-  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,24 +61,37 @@ function AuthScreen() {
     setBusy(screen === "signin" ? "email" : "signup");
     try {
       if (screen === "signin") {
-        setAllowSessionRedirect(true);
+        setAllowSessionRedirect(false);
         await store.signInWithPassword(role, email, password);
+        setSigninOpen(true);
       } else {
         setAllowSessionRedirect(false);
         const result = await store.signUpWithPassword(role, email, password);
-        try {
-          await sendWelcomeEmail({ data: { email: email } });
-        } catch (emailErr) {
-          console.error("Welcome email failed to send, but account was created.", emailErr);
-        }
-        // ----------------------
+
         if (result.session) {
           await store.signOut();
         }
+
+        const userId = result.user?.id;
+        if (!userId) {
+          throw new Error("Could not create a verification link.");
+        }
+
+        const { emailSent } = await sendVerificationEmail({
+          data: {
+            email,
+            userId,
+            origin: window.location.origin,
+          },
+        });
+
         setRegistrationOpen(true);
         setScreen("signin");
         setPassword("");
         setShowPassword(false);
+        if (!emailSent) {
+          setError("Account created, but the verification email could not be sent.");
+        }
       }
     } catch (err: unknown) {
       setError(
@@ -108,7 +119,7 @@ function AuthScreen() {
 
   return (
     <MobileFrame>
-      <div className="flex-1 flex flex-col px-8 pt-16 pb-10">
+      <div className="relative flex-1 flex flex-col px-8 pt-16 pb-10">
         <div>
           <h1 className="text-4xl font-black tracking-tight text-foreground">
             GLORIKAR<span className="text-brand-blue">.</span>
@@ -235,30 +246,49 @@ function AuthScreen() {
             )}
           </p>
         </form>
-      </div>
+        {registrationOpen && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
+            <div className="w-full max-w-sm rounded-3xl border border-border bg-surface p-6 text-center shadow-2xl">
+              <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <CheckCircle2 className="size-7" />
+              </div>
+              <h2 className="text-2xl font-black tracking-tight text-foreground">
+                Registration complete
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Your account is created. Check your email and open the confirmation link to reach
+                the confirm screen.
+              </p>
 
-      <Dialog
-        open={registrationOpen}
-        onOpenChange={(open) => (!open ? goToSignin() : setRegistrationOpen(true))}
-      >
-        <DialogContent className="max-w-sm rounded-2xl">
-          <DialogHeader>
-            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
-              <CheckCircle2 className="size-6" />
+              <Button
+                onClick={() => {
+                  setRegistrationOpen(false);
+                  setScreen("signin");
+                  setPassword("");
+                  setShowPassword(false);
+                }}
+                className="mt-6 w-full rounded-2xl"
+              >
+                Go to sign in
+              </Button>
             </div>
-            <DialogTitle className="text-center text-2xl">Registration complete</DialogTitle>
-            <DialogDescription className="text-center">
-              Your account was created. Check your email for the confirmation link, then return here
-              to sign in.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="mt-2 flex-col sm:flex-col sm:space-x-0">
-            <Button onClick={goToSignin} className="w-full rounded-xl">
-              Go to sign in
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </div>
+        )}
+
+        {signinOpen && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
+            <div className="w-full max-w-sm rounded-3xl border border-border bg-surface p-6 text-center shadow-2xl">
+              <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <CheckCircle2 className="size-7" />
+              </div>
+              <h2 className="text-2xl font-black tracking-tight text-foreground">Signing in</h2>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                You’re authenticated. Loading your dashboard now.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </MobileFrame>
   );
 }
