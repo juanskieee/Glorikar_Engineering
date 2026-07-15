@@ -52,9 +52,27 @@ export const SERVICES: { type: ServiceType; desc: string; price: number }[] = [
 ];
 
 export const TEAMS: Team[] = [
-  { id: "t1", name: "Team Alpha", members: ["Senthil K.", "Ravi M."], color: "#0284c7", activeJobs: 3 },
-  { id: "t2", name: "Team Bravo", members: ["Ah Seng", "Kumar"], color: "#ea580c", activeJobs: 2 },
-  { id: "t3", name: "Team Charlie", members: ["Muthu", "Wei Ming"], color: "#16a34a", activeJobs: 4 },
+  {
+    id: "11111111-1111-1111-1111-111111111111",
+    name: "Team Alpha",
+    members: ["Senthil K.", "Ravi M."],
+    color: "#0284c7",
+    activeJobs: 3,
+  },
+  {
+    id: "22222222-2222-2222-2222-222222222222",
+    name: "Team Bravo",
+    members: ["Ah Seng", "Kumar"],
+    color: "#ea580c",
+    activeJobs: 2,
+  },
+  {
+    id: "33333333-3333-3333-3333-333333333333",
+    name: "Team Charlie",
+    members: ["Muthu", "Wei Ming"],
+    color: "#16a34a",
+    activeJobs: 4,
+  },
 ];
 
 export const INITIAL_BOOKINGS: Booking[] = [
@@ -87,7 +105,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
     preferredTo: "2026-07-15",
     scheduledAt: "2026-07-15T11:45:00",
     status: "SCHEDULED",
-    teamId: "t1",
+    teamId: "11111111-1111-1111-1111-111111111111",
     price: 700,
   },
   {
@@ -118,7 +136,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
     preferredTo: "2026-07-14",
     scheduledAt: "2026-07-14T14:00:00",
     status: "EN_ROUTE",
-    teamId: "t1",
+    teamId: "11111111-1111-1111-1111-111111111111",
     price: 120,
   },
   {
@@ -134,7 +152,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
     preferredTo: "2026-07-10",
     scheduledAt: "2026-07-10T09:00:00",
     status: "COMPLETED",
-    teamId: "t2",
+    teamId: "22222222-2222-2222-2222-222222222222",
     price: 60,
   },
 ];

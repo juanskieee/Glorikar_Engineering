@@ -1,35 +1,88 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { ArrowRight, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { MobileFrame } from "@/components/mobile-frame";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { store, useSession } from "@/lib/store";
 
 export const Route = createFileRoute("/auth")({
   component: AuthScreen,
 });
 
+type Screen = "signin" | "signup";
+
 function AuthScreen() {
+  const [screen, setScreen] = useState<Screen>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState<"client" | "admin">("client");
   const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState<null | "email" | "google">(null);
+  const [busy, setBusy] = useState<null | "email" | "google" | "signup">(null);
+  const [registrationOpen, setRegistrationOpen] = useState(false);
+  const [allowSessionRedirect, setAllowSessionRedirect] = useState(true);
   const navigate = useNavigate();
   const session = useSession();
 
   useEffect(() => {
+    if (role === "admin") {
+      setScreen("signin");
+      setRegistrationOpen(false);
+      setAllowSessionRedirect(true);
+    }
+  }, [role]);
+
+  useEffect(() => {
+    if (!allowSessionRedirect) return;
     if (session.role === "admin") navigate({ to: "/admin" });
     else if (session.role === "client") navigate({ to: "/client" });
-  }, [session.role, navigate]);
+  }, [allowSessionRedirect, session.role, navigate]);
+
+  const goToSignin = () => {
+    setRegistrationOpen(false);
+    setScreen("signin");
+    setPassword("");
+    setShowPassword(false);
+    setError(null);
+    setAllowSessionRedirect(true);
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return;
     setError(null);
-    setBusy("email");
+    setBusy(screen === "signin" ? "email" : "signup");
     try {
-      await store.signInWithPassword(role, email, password);
-    } catch (err: any) {
-      setError(err?.message ?? "Sign in failed");
+      if (screen === "signin") {
+        setAllowSessionRedirect(true);
+        await store.signInWithPassword(role, email, password);
+      } else {
+        setAllowSessionRedirect(false);
+        const result = await store.signUpWithPassword(role, email, password);
+        if (result.session) {
+          await store.signOut();
+        }
+        setRegistrationOpen(true);
+        setScreen("signin");
+        setPassword("");
+        setShowPassword(false);
+      }
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : screen === "signin"
+            ? "Sign in failed"
+            : "Registration failed",
+      );
     } finally {
       setBusy(null);
     }
@@ -40,8 +93,8 @@ function AuthScreen() {
     setBusy("google");
     try {
       await store.signInWithGoogle(role);
-    } catch (err: any) {
-      setError(err?.message ?? "Google sign in failed");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Google sign in failed");
       setBusy(null);
     }
   };
@@ -50,30 +103,31 @@ function AuthScreen() {
     <MobileFrame>
       <div className="flex-1 flex flex-col px-8 pt-16 pb-10">
         <div>
-          <p className="text-[10px] font-mono uppercase tracking-widest text-brand-blue font-bold">
-            Aircon Services
-          </p>
-          <h1 className="text-4xl font-black tracking-tight mt-1 text-foreground">
+          <h1 className="text-4xl font-black tracking-tight text-foreground">
             GLORIKAR<span className="text-brand-blue">.</span>
           </h1>
-          <p className="mt-6 text-sm text-muted-foreground max-w-[32ch]">
-            Sign in to book service or manage today's dispatch queue.
+          <p className="mt-8 text-base leading-7 text-muted-foreground max-w-[28ch]">
+            {screen === "signin"
+              ? "Sign in to book service or manage today's dispatch queue."
+              : "Create your account to start booking aircon service in minutes."}
           </p>
         </div>
 
-        <form onSubmit={submit} className="mt-10 space-y-4 flex-1">
-          <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-              Sign in as
+        <form onSubmit={submit} className="mt-12 space-y-5 flex-1">
+          <div className="pt-2">
+            <label className="text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground/70">
+              Account type
             </label>
-            <div className="mt-2 bg-muted p-1 rounded-xl flex gap-1">
+            <div className="mt-3 grid grid-cols-2 gap-2">
               {(["client", "admin"] as const).map((r) => (
                 <button
                   key={r}
                   type="button"
                   onClick={() => setRole(r)}
-                  className={`flex-1 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors ${
-                    role === r ? "bg-surface shadow-sm text-foreground" : "text-muted-foreground"
+                  className={`rounded-2xl border px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] transition-all ${
+                    role === r
+                      ? "border-brand-blue bg-brand-blue/10 text-foreground shadow-sm"
+                      : "border-border bg-surface text-muted-foreground hover:border-foreground/20 hover:text-foreground"
                   }`}
                 >
                   {r === "client" ? "Client" : "Boss / Admin"}
@@ -83,7 +137,7 @@ function AuthScreen() {
           </div>
 
           <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+            <label className="text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground/70">
               Email
             </label>
             <input
@@ -91,84 +145,113 @@ function AuthScreen() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@glorikar.sg"
-              className="mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-brand-blue"
+              className="mt-3 w-full rounded-2xl border border-border bg-surface px-4 py-3 text-sm font-medium shadow-sm outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20"
               required
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+            <label className="text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground/70">
               Password
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="At least 6 characters"
-              minLength={6}
-              className="mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-brand-blue"
-              required
-            />
+            <div className="relative mt-3">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={screen === "signin" ? "Your password" : "At least 6 characters"}
+                minLength={6}
+                className="w-full rounded-2xl border border-border bg-surface px-4 py-3 pr-12 text-sm font-medium shadow-sm outline-none transition-all focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((value) => !value)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute inset-y-0 right-3 my-auto inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              </button>
+            </div>
           </div>
 
-          {error && (
-            <p className="text-xs font-medium text-destructive">{error}</p>
-          )}
+          {error && <p className="text-xs font-medium text-destructive">{error}</p>}
 
           <button
             type="submit"
             disabled={busy !== null}
-            className="w-full bg-foreground text-background py-4 rounded-xl text-sm font-bold uppercase tracking-wider mt-2 transition-transform active:scale-95 disabled:opacity-60"
+            className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-foreground py-4 text-sm font-bold uppercase tracking-[0.18em] text-background shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:opacity-60"
           >
-            {busy === "email" ? "Signing in…" : "Sign in / Sign up →"}
+            {screen === "signin"
+              ? busy === "email"
+                ? "Signing in…"
+                : "Sign in →"
+              : busy === "signup"
+                ? "Creating account…"
+                : "Create account →"}
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </button>
 
-          <div className="flex items-center gap-3 pt-1">
-            <div className="h-px flex-1 bg-border" />
-            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-              or
-            </span>
-            <div className="h-px flex-1 bg-border" />
-          </div>
-
-          <button
-            type="button"
-            onClick={google}
-            disabled={busy !== null}
-            className="w-full flex items-center justify-center gap-3 bg-surface border border-border py-3.5 rounded-xl text-sm font-bold text-foreground transition-transform active:scale-95 disabled:opacity-60"
-          >
-            <GoogleIcon />
-            {busy === "google" ? "Redirecting…" : "Continue with Google"}
-          </button>
-
-          <p className="text-[11px] text-muted-foreground text-center font-mono pt-2">
-            New here? Enter an email + password to create an account.
+          <p className="pt-3 text-center text-sm text-muted-foreground">
+            {role === "admin" ? (
+              <>
+                Contact the App developer to create an account.{" "}
+                <a
+                  href="mailto:developer@app.com"
+                  className="font-semibold text-brand-blue underline-offset-4 hover:underline"
+                >
+                  Contact Developer
+                </a>
+              </>
+            ) : screen === "signin" ? (
+              <>
+                New here?{" "}
+                <button
+                  type="button"
+                  onClick={() => setScreen("signup")}
+                  className="font-semibold text-brand-blue underline-offset-4 hover:underline"
+                >
+                  Create an account
+                </button>
+              </>
+            ) : (
+              <>
+                Already have one?{" "}
+                <button
+                  type="button"
+                  onClick={() => setScreen("signin")}
+                  className="font-semibold text-brand-blue underline-offset-4 hover:underline"
+                >
+                  Sign in
+                </button>
+              </>
+            )}
           </p>
         </form>
       </div>
-    </MobileFrame>
-  );
-}
 
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
-      <path
-        fill="#FFC107"
-        d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"
-      />
-      <path
-        fill="#FF3D00"
-        d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"
-      />
-      <path
-        fill="#4CAF50"
-        d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.4-4.5 2.4-7.2 2.4-5.3 0-9.7-3.4-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"
-      />
-      <path
-        fill="#1976D2"
-        d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8 0-1.2-.1-2.4-.4-3.5z"
-      />
-    </svg>
+      <Dialog
+        open={registrationOpen}
+        onOpenChange={(open) => (!open ? goToSignin() : setRegistrationOpen(true))}
+      >
+        <DialogContent className="max-w-sm rounded-2xl">
+          <DialogHeader>
+            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+              <CheckCircle2 className="size-6" />
+            </div>
+            <DialogTitle className="text-center text-2xl">Registration complete</DialogTitle>
+            <DialogDescription className="text-center">
+              Your account was created. Check your email for the confirmation link, then return here
+              to sign in.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="mt-2 flex-col sm:flex-col sm:space-x-0">
+            <Button onClick={goToSignin} className="w-full rounded-xl">
+              Go to sign in
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </MobileFrame>
   );
 }
