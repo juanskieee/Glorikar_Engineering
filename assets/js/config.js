@@ -5,4 +5,4 @@
 
 export const API_URL         = 'https://api.glorikar.com'; // TODO: set on deploy
 export const MAPBOX_TOKEN    = 'pk.YOUR_MAPBOX_TOKEN';     // TODO: set on deploy
-export const VAPID_PUBLIC_KEY = 'YOUR_VAPID_PUBLIC_KEY';   // TODO: set on deploy
+export const VAPID_PUBLIC_KEY = 'BMVrElpHJyBOqIkXog9bGWbuqSkp84NpUALeSCp_UNCodhQ88Ysn00btPMZGGBjQRheVoStaAv0brATJZ0TPY2c';

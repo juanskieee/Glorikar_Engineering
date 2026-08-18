@@ -1,0 +1,223 @@
+<?php
+require __DIR__ . '/../backend/includes/auth-guard.php';
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+$csrfToken = get_csrf_token();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="<?php echo htmlspecialchars($csrfToken); ?>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Book a Service — Glorikar Engineering</title>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+</head>
+<body>
+<div class="app-shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main-content">
+
+    <header class="page-header">
+      <div class="page-header-left">
+        <a href="home.php" class="btn-icon" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </a>
+        <div>
+          <div class="page-title">Book a Service</div>
+          <div class="page-subtitle">Select the services you need</div>
+        </div>
+      </div>
+      <!-- Step indicator -->
+      <div class="step-indicator">
+        <div class="step-indicator-item active">
+          <div class="step-dot active">1</div>
+        </div>
+        <div class="step-indicator-item">
+          <div class="step-dot">2</div>
+        </div>
+        <div class="step-indicator-item">
+          <div class="step-dot">3</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page">
+
+      <div class="section-header mb-sm">Step 1 — Choose services</div>
+
+      <div class="stack stack-sm" id="service-list">
+        <!-- Populated from API / fallback below -->
+        <div class="service-card" data-service-id="1" data-price="350" tabindex="0" role="button">
+          <div class="service-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <div class="service-card-body">
+            <div class="service-card-name">Aircon Cleaning</div>
+            <div class="service-card-desc">Deep clean, filter wash, coil cleaning, drain check</div>
+            <div class="service-card-price">₱350 / unit</div>
+            <div class="service-card-qty">
+              <button class="qty-btn" data-action="dec">−</button>
+              <span class="qty-val">0</span>
+              <button class="qty-btn" data-action="inc">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" data-service-id="2" data-price="2500" tabindex="0" role="button">
+          <div class="service-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M4.93 4.93l1.41 1.41M18.66 18.66l1.41 1.41M2 12h2m16 0h2M12 2v2m0 16v2"/></svg>
+          </div>
+          <div class="service-card-body">
+            <div class="service-card-name">Installation</div>
+            <div class="service-card-desc">New unit mounting, refrigerant charging, electrical wiring</div>
+            <div class="service-card-price">₱2,500 / unit</div>
+            <div class="service-card-qty">
+              <button class="qty-btn" data-action="dec">−</button>
+              <span class="qty-val">0</span>
+              <button class="qty-btn" data-action="inc">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" data-service-id="3" data-price="1200" tabindex="0" role="button">
+          <div class="service-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="service-card-body">
+            <div class="service-card-name">Relocation</div>
+            <div class="service-card-desc">Dismount and reinstall unit in a new location</div>
+            <div class="service-card-price">₱1,200 / unit</div>
+            <div class="service-card-qty">
+              <button class="qty-btn" data-action="dec">−</button>
+              <span class="qty-val">0</span>
+              <button class="qty-btn" data-action="inc">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" data-service-id="4" data-price="800" tabindex="0" role="button">
+          <div class="service-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="service-card-body">
+            <div class="service-card-name">Repair</div>
+            <div class="service-card-desc">Diagnostics, fault repair, parts replacement (parts extra)</div>
+            <div class="service-card-price">₱800 / visit</div>
+            <div class="service-card-qty">
+              <button class="qty-btn" data-action="dec">−</button>
+              <span class="qty-val">0</span>
+              <button class="qty-btn" data-action="inc">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" data-service-id="5" data-price="500" tabindex="0" role="button">
+          <div class="service-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="service-card-body">
+            <div class="service-card-name">Inspection</div>
+            <div class="service-card-desc">Full system health check with written report</div>
+            <div class="service-card-price">₱500 / unit</div>
+            <div class="service-card-qty">
+              <button class="qty-btn" data-action="dec">−</button>
+              <span class="qty-val">0</span>
+              <button class="qty-btn" data-action="inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="form-group mt-lg">
+        <label class="form-label" for="notes">Additional notes <span class="text-disabled">(optional)</span></label>
+        <textarea class="input" id="notes" placeholder="e.g. 3 units on 2nd floor, parking available…" rows="3"></textarea>
+      </div>
+
+      <div style="height: var(--sp-xxl)"></div><!-- action-bar spacer -->
+    </div>
+
+  </main>
+  <nav class="bottom-nav" id="bottom-nav"></nav>
+</div>
+
+<!-- Sticky total + next button -->
+<div class="action-bar">
+  <div class="flex-1">
+    <div class="label-sm text-secondary">Estimated total</div>
+    <div class="heading-sm" id="total-display">₱0</div>
+  </div>
+  <button class="btn btn-primary" id="next-btn" disabled>Next →</button>
+</div>
+
+<script type="module">
+import { requireAuth } from '../assets/js/auth.js';
+import { renderNav } from '../assets/js/nav.js';
+
+await requireAuth();
+renderNav();
+
+// Pre-select from query string (?service=cleaning)
+const preselect = new URLSearchParams(window.location.search).get('service');
+
+const state = {};  // { serviceId: qty }
+
+function recalc() {
+  let total = 0;
+  let count = 0;
+  document.querySelectorAll('.service-card').forEach(card => {
+    const id  = card.dataset.serviceId;
+    const price = parseInt(card.dataset.price, 10);
+    const qty = state[id] || 0;
+    const qtyEl = card.querySelector('.qty-val');
+    qtyEl.textContent = qty;
+    card.classList.toggle('selected', qty > 0);
+    total += price * qty;
+    count += qty;
+  });
+  document.getElementById('total-display').textContent = `₱${total.toLocaleString()}`;
+  document.getElementById('next-btn').disabled = count === 0;
+}
+
+document.querySelectorAll('.qty-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const card = btn.closest('.service-card');
+    const id   = card.dataset.serviceId;
+    const action = btn.dataset.action;
+    state[id] = Math.max(0, (state[id] || 0) + (action === 'inc' ? 1 : -1));
+    recalc();
+  });
+});
+
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.dataset.serviceId;
+    if (!(state[id] > 0)) { state[id] = 1; recalc(); }
+  });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { card.click(); e.preventDefault(); }
+  });
+});
+
+// Handle next
+document.getElementById('next-btn').addEventListener('click', () => {
+  const services = Object.entries(state)
+    .filter(([,q]) => q > 0)
+    .map(([id, qty]) => ({ service_id: id, quantity: qty }));
+  const notes = document.getElementById('notes').value.trim();
+  sessionStorage.setItem('booking_draft', JSON.stringify({ services, notes }));
+  window.location.href = 'select-dates.php';
+});
+
+recalc();
+</script>
+</body>
+</html>

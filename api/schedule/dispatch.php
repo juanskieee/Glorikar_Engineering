@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../_bootstrap.php';
 require_once __DIR__ . '/../../backend/includes/role-guard.php';
+require_once __DIR__ . '/../../backend/services/PushService.php';
 
 
 
@@ -33,7 +34,7 @@ $pdo->prepare("
 
 // Gather client ids for push notifications
 $clientStmt = $pdo->prepare("
-    SELECT DISTINCT u.id AS client_id, u.full_name, ss.eta
+    SELECT DISTINCT u.id AS client_id, u.full_name, b.id AS booking_id, ss.eta
     FROM schedule_stops ss
     JOIN bookings b ON b.id = ss.booking_id
     JOIN users u    ON u.id = b.client_id
@@ -43,8 +44,17 @@ $clientStmt = $pdo->prepare("
 $clientStmt->execute([$id]);
 $clients = $clientStmt->fetchAll();
 
-// TODO: send Web Push notification to each client with their ETA
-// foreach ($clients as $client) { sendWebPush($client['client_id'], "Your team is on the way! ETA: " . $client['eta']); }
+// Notify every client in the dispatched schedule
+foreach ($clients as $client) {
+    $msg = 'Your technician team is en route.';
+    if (!empty($client['eta'])) $msg .= ' ETA: ' . $client['eta'];
+    PushService::send(
+        (string)$client['client_id'],
+        'Team On The Way',
+        $msg,
+        '/client/booking-status.php?id=' . $client['booking_id']
+    );
+}
 
 respond([
     'schedule'         => ['id' => $id, 'status' => 'dispatched'],

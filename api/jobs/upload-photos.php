@@ -15,6 +15,14 @@ if (empty($token) || !hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
     respond_error('CSRF token mismatch', 403, 'CSRF_INVALID');
 }
 
+function uuid4(): string
+{
+    $d = random_bytes(16);
+    $d[6] = chr((ord($d[6]) & 0x0f) | 0x40);
+    $d[8] = chr((ord($d[8]) & 0x3f) | 0x80);
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($d), 4));
+}
+
 $bookingId = trim($_POST['booking_id'] ?? '');
 $type      = trim($_POST['type']       ?? '');
 
@@ -42,13 +50,13 @@ if (is_array($_FILES['photos']['name'])) {
     $files[] = $_FILES['photos'];
 }
 
-$uploadDir = __DIR__ . '/../../uploads/job-photos/';
+$uploadDir = __DIR__ . '/../../backend/uploads/job-photos/';
 if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
-// Block PHP execution in upload dir (write .htaccess once)
+// Block web access in upload dir (parent backend/uploads/.htaccess already denies)
 $htaccess = $uploadDir . '.htaccess';
 if (!file_exists($htaccess)) {
-    file_put_contents($htaccess, "php_flag engine off\nOptions -ExecCGI\n");
+    file_put_contents($htaccess, "Options -ExecCGI\nAddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi\ndeny from all\n");
 }
 
 $maxBytes      = 5 * 1024 * 1024; // 5 MB
@@ -95,13 +103,13 @@ foreach ($files as $file) {
         continue;
     }
 
-    // Safe rename
+    // Safe rename — UUID v4 filename, never the client's original name
     $ext      = match($mime) {
         'image/jpeg' => 'jpg',
         'image/png'  => 'png',
         'image/webp' => 'webp',
     };
-    $filename = bin2hex(random_bytes(16)) . '.' . $ext;
+    $filename = uuid4() . '.' . $ext;
     $dest     = $uploadDir . $filename;
 
     if (!move_uploaded_file($file['tmp_name'], $dest)) {
@@ -109,20 +117,18 @@ foreach ($files as $file) {
         continue;
     }
 
-    // Relative URL stored in DB (served via a dedicated route or web server)
-    $photoUrl = '/uploads/job-photos/' . $filename;
-
-    $photoId = bin2hex(random_bytes(16));
+    // Store the filename only — the file lives behind backend/uploads/.htaccess
+    // and is served via an authenticated route, never directly by the web server.
     $pdo->prepare('
         INSERT INTO job_photos (id, booking_id, photo_url, type)
         VALUES (UUID(), ?, ?, ?)
-    ')->execute([$bookingId, $photoUrl, $type]);
+    ')->execute([$bookingId, $filename, $type]);
 
     $lastId = $pdo->prepare('SELECT id FROM job_photos WHERE booking_id = ? AND photo_url = ? LIMIT 1');
-    $lastId->execute([$bookingId, $photoUrl]);
+    $lastId->execute([$bookingId, $filename]);
     $row = $lastId->fetch();
 
-    $saved[] = ['id' => $row['id'], 'photo_url' => $photoUrl, 'type' => $type];
+    $saved[] = ['id' => $row['id'], 'filename' => $filename, 'type' => $type];
 }
 
 $response = ['photos' => $saved];

@@ -1,0 +1,219 @@
+<?php
+require __DIR__ . '/../backend/includes/auth-guard.php';
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+$csrfToken = get_csrf_token();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="<?php echo htmlspecialchars($csrfToken); ?>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Confirm Booking — Glorikar Engineering</title>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+</head>
+<body>
+<div class="app-shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main-content">
+
+    <header class="page-header">
+      <div class="page-header-left">
+        <a href="select-dates.php" class="btn-icon" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </a>
+        <div>
+          <div class="page-title">Review & Confirm</div>
+          <div class="page-subtitle">Check your booking details before submitting</div>
+        </div>
+      </div>
+      <div class="step-indicator">
+        <div class="step-indicator-item active"><div class="step-dot complete">✓</div></div>
+        <div class="step-indicator-item active"><div class="step-dot complete">✓</div></div>
+        <div class="step-indicator-item active"><div class="step-dot active">3</div></div>
+      </div>
+    </header>
+
+    <div class="page">
+
+      <div id="error-banner" class="hidden mb-md" style="
+        background: rgba(239,68,68,0.1);
+        border: 1px solid var(--status-cancelled);
+        border-radius: var(--r-sm);
+        padding: var(--sp-sm) var(--sp-md);
+        font: 400 13px/18px Inter;
+        color: var(--status-cancelled);
+      "></div>
+
+      <!-- Services summary -->
+      <div class="section-header mb-sm">Services</div>
+      <div class="card" id="services-summary" style="padding:0;overflow:hidden"></div>
+
+      <!-- Date & address -->
+      <div class="section-header mt-lg mb-sm">Schedule & Location</div>
+      <div class="card">
+        <div class="stack stack-sm">
+          <div class="row-between">
+            <span class="label-sm text-secondary">Preferred window</span>
+            <span class="label-lg" id="dates-display">—</span>
+          </div>
+          <hr class="divider">
+          <div class="row-between" style="align-items:flex-start">
+            <span class="label-sm text-secondary">Service address</span>
+            <span class="label-lg" id="address-display" style="text-align:right;max-width:200px">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div id="notes-block" class="hidden">
+        <div class="section-header mt-lg mb-sm">Notes</div>
+        <div class="card">
+          <p class="body-sm" id="notes-display"></p>
+        </div>
+      </div>
+
+      <!-- Estimated total -->
+      <div class="section-header mt-lg mb-sm">Estimate</div>
+      <div class="card">
+        <div id="invoice-lines"></div>
+        <div class="invoice-row total">
+          <span>Estimated total</span>
+          <span class="invoice-amount" id="total-display">₱0</span>
+        </div>
+        <p class="caption text-secondary mt-sm">
+          Final amount confirmed after the technician's visit. Parts and materials are billed separately.
+        </p>
+      </div>
+
+      <!-- What happens next -->
+      <div class="section-header mt-lg mb-sm">What happens next</div>
+      <div class="card">
+        <div class="stack stack-sm">
+          <div class="row row-sm">
+            <div class="step-dot complete" style="width:24px;height:24px;font-size:11px;flex-shrink:0">1</div>
+            <div class="body-sm">Your booking is submitted as <span class="badge badge-pending">Pending</span></div>
+          </div>
+          <div class="row row-sm">
+            <div class="step-dot" style="width:24px;height:24px;font-size:11px;flex-shrink:0;border-color:var(--status-scheduled);color:var(--status-scheduled)">2</div>
+            <div class="body-sm">Our system schedules it within your preferred window</div>
+          </div>
+          <div class="row row-sm">
+            <div class="step-dot" style="width:24px;height:24px;font-size:11px;flex-shrink:0;border-color:var(--accent);color:var(--accent)">3</div>
+            <div class="body-sm">You receive a push notification when the technician is dispatched</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:var(--sp-xxl)"></div>
+    </div>
+  </main>
+  <nav class="bottom-nav" id="bottom-nav"></nav>
+</div>
+
+<div class="action-bar">
+  <button class="btn btn-ghost" onclick="history.back()">Edit</button>
+  <button class="btn btn-primary flex-1" id="confirm-btn">
+    <span id="btn-text">Confirm booking</span>
+    <span id="btn-spinner" class="spinner hidden" style="width:16px;height:16px;border-width:2px;"></span>
+  </button>
+</div>
+
+<script type="module">
+import { requireAuth } from '../assets/js/auth.js';
+import { renderNav } from '../assets/js/nav.js';
+import { post } from '../assets/js/api.js';
+
+await requireAuth();
+renderNav();
+
+const draft = JSON.parse(sessionStorage.getItem('booking_draft') || 'null');
+if (!draft) { window.location.href = 'book-service.php'; }
+
+const serviceNames = {
+  '1': { name: 'Aircon Cleaning',  price: 350  },
+  '2': { name: 'Installation',     price: 2500 },
+  '3': { name: 'Relocation',       price: 1200 },
+  '4': { name: 'Repair',           price: 800  },
+  '5': { name: 'Inspection',       price: 500  },
+};
+
+// Populate services
+const servicesEl = document.getElementById('services-summary');
+let total = 0;
+let invoiceLines = '';
+servicesEl.innerHTML = draft.services.map(s => {
+  const svc    = serviceNames[s.service_id] || { name: `Service ${s.service_id}`, price: 0 };
+  const amount = svc.price * s.quantity;
+  total += amount;
+  invoiceLines += `<div class="invoice-row"><span>${svc.name} × ${s.quantity}</span><span class="invoice-amount">₱${amount.toLocaleString()}</span></div>`;
+  return `
+    <div class="list-row" style="cursor:default">
+      <div class="list-row-body">
+        <div class="list-row-title">${svc.name}</div>
+        <div class="list-row-sub">Qty: ${s.quantity}</div>
+      </div>
+      <div class="label-lg">₱${amount.toLocaleString()}</div>
+    </div>`;
+}).join('');
+
+document.getElementById('invoice-lines').innerHTML = invoiceLines;
+document.getElementById('total-display').textContent = `₱${total.toLocaleString()}`;
+
+// Dates
+const fromDate = new Date(draft.preferred_date_from + 'T00:00:00');
+const toDate   = new Date(draft.preferred_date_to   + 'T00:00:00');
+const fmtDate  = d => d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+const sameDay  = draft.preferred_date_from === draft.preferred_date_to;
+document.getElementById('dates-display').textContent = sameDay
+  ? fmtDate(fromDate)
+  : `${fmtDate(fromDate)} – ${fmtDate(toDate)}`;
+
+document.getElementById('address-display').textContent = draft.address;
+
+// Notes
+if (draft.notes) {
+  document.getElementById('notes-display').textContent = draft.notes;
+  document.getElementById('notes-block').classList.remove('hidden');
+}
+
+// Submit
+const confirmBtn = document.getElementById('confirm-btn');
+const btnText    = document.getElementById('btn-text');
+const btnSpinner = document.getElementById('btn-spinner');
+const errBanner  = document.getElementById('error-banner');
+
+confirmBtn.addEventListener('click', async () => {
+  errBanner.classList.add('hidden');
+  confirmBtn.disabled = true;
+  btnText.textContent = 'Submitting…';
+  btnSpinner.classList.remove('hidden');
+
+  try {
+    const result = await post('/api/bookings/create.php', {
+      services:            draft.services,
+      preferred_date_from: draft.preferred_date_from,
+      preferred_date_to:   draft.preferred_date_to,
+      address:             draft.address,
+      notes:               draft.notes || '',
+    });
+    sessionStorage.removeItem('booking_draft');
+    window.location.href = `booking-status.php?id=${result.booking_id}&new=1`;
+  } catch (err) {
+    errBanner.textContent = err.message || 'Booking failed. Please try again.';
+    errBanner.classList.remove('hidden');
+    confirmBtn.disabled = false;
+    btnText.textContent = 'Confirm booking';
+    btnSpinner.classList.add('hidden');
+  }
+});
+</script>
+</body>
+</html>

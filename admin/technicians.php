@@ -1,0 +1,232 @@
+<?php
+require __DIR__ . '/../backend/includes/role-guard.php';
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+$csrfToken = get_csrf_token();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="csrf-token" content="<?php echo htmlspecialchars($csrfToken); ?>"/>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Teams — Glorikar Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/theme.css"/>
+  <link rel="stylesheet" href="../assets/css/components.css"/>
+  <link rel="stylesheet" href="../assets/css/layout.css"/>
+  <style>
+    .team-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-md);
+    }
+    .team-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-md);
+    }
+    .team-members { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-sm); }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main-content">
+
+    <div class="page">
+      <div class="page-header">
+        <div class="page-header-left">
+          <div class="page-title">Teams</div>
+          <div class="page-subtitle">Manage service teams and technicians</div>
+        </div>
+        <button class="btn btn-primary btn-sm" id="add-team-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Team
+        </button>
+      </div>
+
+      <div id="teams-grid" class="grid-2 mt-md">
+        <div class="skeleton-card" style="height:150px;border-radius:var(--r-md)"></div>
+        <div class="skeleton-card" style="height:150px;border-radius:var(--r-md)"></div>
+        <div class="skeleton-card" style="height:150px;border-radius:var(--r-md)"></div>
+      </div>
+    </div>
+
+  </main>
+  <nav class="bottom-nav" id="bottom-nav"></nav>
+</div>
+
+<!-- Add/Edit Team modal -->
+<div class="modal-overlay" id="team-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="heading-sm" id="modal-title">Add Team</span>
+      <button class="btn-icon" id="close-modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="editing-team-id"/>
+      <div class="form-group">
+        <label class="form-label">Team Name</label>
+        <input class="input" id="team-name-input" placeholder="e.g. Team Alpha"/>
+      </div>
+      <div class="form-group mt-sm">
+        <label class="form-label">Members (comma-separated names)</label>
+        <input class="input" id="team-members-input" placeholder="Juan, Pedro, Maria"/>
+      </div>
+      <div class="form-group mt-sm">
+        <label class="form-label">Base Location (address)</label>
+        <input class="input" id="team-base-input" placeholder="Cavite City, Cavite"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancel-modal">Cancel</button>
+      <button class="btn btn-primary" id="save-team-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script type="module">
+import { requireAdmin }     from '../assets/js/auth.js';
+import { renderNav }        from '../assets/js/nav.js';
+import { get, post, patch, del } from '../assets/js/api.js';
+
+await requireAdmin();
+renderNav();
+
+function toast(msg, type = 'info') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast toast-${type}`;
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+function renderTeams(teams) {
+  const grid = document.getElementById('teams-grid');
+  if (!teams?.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-title">No teams yet</div>
+      <div class="empty-state-body">Add your first service team to get started.</div>
+      <button class="btn btn-primary btn-sm mt-sm" id="empty-add-btn">Add Team</button>
+    </div>`;
+    document.getElementById('empty-add-btn')?.addEventListener('click', openModal);
+    return;
+  }
+  grid.innerHTML = teams.map(t => `
+    <div class="team-card">
+      <div class="team-card-header">
+        <div>
+          <div class="heading-sm">${t.name}</div>
+          <div class="caption text-secondary">${t.base_location || 'No base set'}</div>
+        </div>
+        <div class="row" style="gap:var(--sp-xs)">
+          <button class="btn-icon edit-team-btn" data-id="${t.id}" data-name="${t.name}" data-members="${(t.members||[]).join(', ')}" data-base="${t.base_location || ''}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="btn-icon delete-team-btn" data-id="${t.id}" style="color:var(--status-cancelled)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="label-sm text-secondary">${t.members?.length ?? 0} member${t.members?.length !== 1 ? 's' : ''}</div>
+      <div class="team-members mt-sm">
+        ${(t.members || []).map(m => `<div class="member-chip">${m}</div>`).join('')}
+      </div>
+      <div class="divider mt-md"></div>
+      <div class="row row-between mt-sm">
+        <div class="caption text-secondary">${t.jobs_this_week ?? 0} jobs this week</div>
+        <a href="jobs.php?team=${t.id}" class="btn btn-ghost btn-sm">View Jobs</a>
+      </div>
+    </div>`).join('');
+
+  document.querySelectorAll('.edit-team-btn').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset));
+  });
+  document.querySelectorAll('.delete-team-btn').forEach(btn => {
+    btn.addEventListener('click', () => deleteTeam(btn.dataset.id));
+  });
+}
+
+let editingId = null;
+
+function openModal(data = {}) {
+  editingId = data.id || null;
+  document.getElementById('modal-title').textContent = editingId ? 'Edit Team' : 'Add Team';
+  document.getElementById('team-name-input').value    = data.name    || '';
+  document.getElementById('team-members-input').value = data.members || '';
+  document.getElementById('team-base-input').value    = data.base    || '';
+  document.getElementById('team-modal').style.display = 'flex';
+}
+
+function closeModal() { document.getElementById('team-modal').style.display = 'none'; }
+document.getElementById('close-modal').addEventListener('click', closeModal);
+document.getElementById('cancel-modal').addEventListener('click', closeModal);
+document.getElementById('team-modal').addEventListener('click', e => { if (e.target === document.getElementById('team-modal')) closeModal(); });
+document.getElementById('add-team-btn').addEventListener('click', () => openModal());
+
+document.getElementById('save-team-btn').addEventListener('click', async () => {
+  const name    = document.getElementById('team-name-input').value.trim();
+  const members = document.getElementById('team-members-input').value.split(',').map(s => s.trim()).filter(Boolean);
+  const base    = document.getElementById('team-base-input').value.trim();
+  if (!name) { toast('Team name is required.', 'error'); return; }
+
+  const btn = document.getElementById('save-team-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    if (editingId) {
+      await patch(`/api/admin/team.php?id=${editingId}`, { name, members, base_location: base });
+    } else {
+      await post('/api/admin/teams.php', { name, members, base_location: base });
+    }
+    closeModal();
+    toast(editingId ? 'Team updated.' : 'Team added.', 'success');
+    loadTeams();
+  } catch (err) {
+    toast('Failed: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save';
+  }
+});
+
+async function deleteTeam(id) {
+  if (!confirm('Delete this team? This cannot be undone.')) return;
+  try {
+    await del(`/api/admin/team.php?id=${id}`);
+    toast('Team deleted.', 'success');
+    loadTeams();
+  } catch (err) {
+    toast('Failed: ' + err.message, 'error');
+  }
+}
+
+async function loadTeams() {
+  try {
+    const data = await get('/api/admin/teams.php');
+    renderTeams(data.teams);
+  } catch (err) {
+    document.getElementById('teams-grid').innerHTML = `
+      <div class="error-state" style="grid-column:1/-1">
+        <div class="error-state-title">Could not load teams</div>
+        <div class="error-state-body">${err.message}</div>
+        <button class="btn btn-ghost btn-sm mt-sm" onclick="location.reload()">Retry</button>
+      </div>`;
+  }
+}
+
+loadTeams();
+</script>
+</body>
+</html>

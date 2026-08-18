@@ -43,7 +43,8 @@ $dummy_hash = '$2y$12$invalidhashpaddingtomatch256charsinputxx';
 $hash       = $user ? $user['password_hash'] : $dummy_hash;
 
 if (!$user || !password_verify($password, $hash)) {
-    // Log the attempt
+    // Log the attempt (never the password) to the server log
+    error_log("Failed login attempt for email=" . ($email !== '' ? $email : '(empty)') . " from IP=" . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
     $_SESSION[$rl_key][] = $now;
     // Generic message — never reveal if email exists
     respond_error('Invalid email or password.', 401, 'BAD_CREDENTIALS');
@@ -62,7 +63,7 @@ $_SESSION['user_id']     = $user['id'];
 $_SESSION['email']       = $user['email'];
 $_SESSION['role']        = $user['role'];
 $_SESSION['full_name']   = $user['full_name'];
-$_SESSION['last_active'] = time();
+$_SESSION['last_activity'] = time();
 $_SESSION['csrf_token']  = bin2hex(random_bytes(32));
 
 // Clear rate-limit counter on success

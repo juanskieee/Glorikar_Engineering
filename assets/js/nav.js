@@ -15,17 +15,17 @@ const icons = {
 };
 
 const clientNav = [
-  { href: '/client/home.html',        icon: 'home',     label: 'Home'          },
-  { href: '/client/my-bookings.html', icon: 'bookings', label: 'Bookings'      },
-  { href: '/shared/notifications.html', icon: 'bell',   label: 'Notifications' },
-  { href: '/shared/profile.html',     icon: 'user',     label: 'Profile'       },
+  { href: '/client/home.php',        icon: 'home',     label: 'Home'          },
+  { href: '/client/my-bookings.php', icon: 'bookings', label: 'Bookings'      },
+  { href: '/shared/notifications.php', icon: 'bell',   label: 'Notifications' },
+  { href: '/shared/profile.php',     icon: 'user',     label: 'Profile'       },
 ];
 
 const adminNav = [
-  { href: '/admin/dashboard.html',    icon: 'dashboard', label: 'Dashboard'     },
-  { href: '/admin/route-map.html',    icon: 'map',       label: 'Route Map'     },
-  { href: '/admin/teams.html',        icon: 'users',     label: 'Teams'         },
-  { href: '/shared/notifications.html', icon: 'bell',    label: 'Notifications' },
+  { href: '/admin/dashboard.php',    icon: 'dashboard', label: 'Dashboard'     },
+  { href: '/admin/schedule.php',     icon: 'map',       label: 'Route Map'     },
+  { href: '/admin/technicians.php',  icon: 'users',     label: 'Teams'         },
+  { href: '/shared/notifications.php', icon: 'bell',    label: 'Notifications' },
 ];
 
 function isActive(href) {

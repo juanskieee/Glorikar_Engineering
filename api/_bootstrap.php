@@ -6,6 +6,12 @@ declare(strict_types=1);
 //  Sets JSON headers, CORS, error handling.
 // ═══════════════════════════════════════════════════════════
 
+// ── Composer autoload (when installed) ───────────────────
+$autoload = __DIR__ . '/../backend/vendor/autoload.php';
+if (file_exists($autoload)) {
+    require_once $autoload;
+}
+
 
 
 // ── Error display off (never leak stack traces) ───────────
@@ -32,6 +38,12 @@ if (in_array($origin, $allowed_origins, true)) {
 }
 header('Access-Control-Allow-Methods: GET, POST, PATCH, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-CSRF-Token');
+
+// ── Security headers ──────────────────────────────────────
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://api.mapbox.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://*.mapbox.com; connect-src 'self' https://api.mapbox.com; font-src 'self' https://fonts.gstatic.com; worker-src 'self'");
 
 // Pre-flight
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

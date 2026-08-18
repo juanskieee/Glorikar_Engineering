@@ -138,6 +138,28 @@ CREATE TABLE job_photos (
   CONSTRAINT fk_photo_booking FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
 );
 
+-- ── Booking Status Log ───────────────────────────────────
+CREATE TABLE booking_status_log (
+  id          CHAR(36) PRIMARY KEY DEFAULT (UUID()),
+  booking_id  CHAR(36) NOT NULL REFERENCES bookings(id) ON DELETE CASCADE,
+  from_status VARCHAR(20),
+  to_status   VARCHAR(20) NOT NULL,
+  changed_by  CHAR(36) REFERENCES users(id),
+  notes       TEXT,
+  changed_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Push Subscriptions
+CREATE TABLE push_subscriptions (
+  id           CHAR(36) PRIMARY KEY DEFAULT (UUID()),
+  user_id      CHAR(36) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  endpoint     TEXT NOT NULL,
+  p256dh_key   TEXT NOT NULL,
+  auth_key     TEXT NOT NULL,
+  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_endpoint (endpoint(500))
+);
+
 -- ── Indexes ──────────────────────────────────────────────
 CREATE INDEX idx_bookings_client    ON bookings(client_id);
 CREATE INDEX idx_bookings_status    ON bookings(status);
@@ -146,3 +168,4 @@ CREATE INDEX idx_schedules_date     ON schedules(scheduled_date);
 CREATE INDEX idx_schedules_team     ON schedules(team_id);
 CREATE INDEX idx_stops_schedule     ON schedule_stops(schedule_id);
 CREATE INDEX idx_photos_booking     ON job_photos(booking_id);
+CREATE INDEX idx_push_user          ON push_subscriptions(user_id);

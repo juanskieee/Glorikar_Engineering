@@ -1,0 +1,25 @@
+# ═══════════════════════════════════════════════════════════
+#  GLORIKAR — root .htaccess (production reference)
+# ═══════════════════════════════════════════════════════════
+
+Options -Indexes
+ServerSignature Off
+
+# Allow the PWA manifest (the generic .json deny rule below would otherwise block it)
+<Files "manifest.json">
+  Require all granted
+</Files>
+
+# Never serve sensitive / internal files directly
+<FilesMatch "\.(env|sql|log|json|md|gitignore|lock)$">
+  Require all denied
+</FilesMatch>
+
+<FilesMatch "composer\.(json|lock)$">
+  Require all denied
+</FilesMatch>
+
+# Force HTTPS (redirect any HTTP request to HTTPS)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

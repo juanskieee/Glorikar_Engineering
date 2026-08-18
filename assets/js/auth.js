@@ -1,5 +1,6 @@
 // ── Glorikar — Auth Helpers ─────────────────────────────────
 import { get, post } from './api.js';
+import { turnOffNotifications } from './pwa.js';
 
 const SESSION_KEY = 'glorikar_user';
 
@@ -28,7 +29,7 @@ export function getCachedUser() {
 export async function requireAuth() {
   const user = await getMe();
   if (!user) {
-    window.location.href = '/login.html';
+    window.location.href = '/login.php';
     return null;
   }
   return user;
@@ -38,7 +39,7 @@ export async function requireAuth() {
 export async function requireAdmin() {
   const user = await requireAuth();
   if (user && user.role !== 'admin') {
-    window.location.href = '/client/home.html';
+    window.location.href = '/client/home.php';
     return null;
   }
   return user;
@@ -53,7 +54,9 @@ export async function login(email, password) {
 
 /** Logout */
 export async function logout() {
+  // Unsubscribe from push first while the session is still valid
+  try { await turnOffNotifications(); } catch { /* ignore */ }
   try { await post('/api/auth/logout.php', {}); } catch { /* ignore */ }
   sessionStorage.removeItem(SESSION_KEY);
-  window.location.href = '/login.html';
+  window.location.href = '/login.php';
 }

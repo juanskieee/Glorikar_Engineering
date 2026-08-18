@@ -10,16 +10,29 @@ import { API_URL } from './config.js';
  * @returns {Promise<any>} parsed JSON response
  * @throws  {Error} with message from server or HTTP status text
  */
+function csrfToken() {
+  const meta = document.querySelector('meta[name="csrf-token"]');
+  return meta?.content || '';
+}
+
 export async function api(path, opts = {}) {
   const url = `${API_URL}${path}`;
 
+  const method = (opts.method || 'GET').toUpperCase();
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    ...opts.headers,
+  };
+
+  // Attach the CSRF token to every state-changing request
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(method) && !headers['X-CSRF-Token']) {
+    headers['X-CSRF-Token'] = csrfToken();
+  }
+
   const defaults = {
     credentials: 'include',          // send session cookie cross-origin
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      ...opts.headers,
-    },
+    headers,
   };
 
   const res = await fetch(url, { ...defaults, ...opts });

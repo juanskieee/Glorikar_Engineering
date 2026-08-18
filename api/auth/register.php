@@ -114,7 +114,7 @@ $_SESSION['user_id']   = $user['id'];
 $_SESSION['email']     = $user['email'];
 $_SESSION['role']      = $user['role'];
 $_SESSION['full_name'] = $user['full_name'];
-$_SESSION['last_active'] = time();
+$_SESSION['last_activity'] = time();
 $_SESSION['csrf_token']  = bin2hex(random_bytes(32));
 
 respond([

@@ -9,29 +9,36 @@
 
 declare(strict_types=1);
 
-// ── Load .env manually (no Composer yet at this phase) ───
-// If you add vlucas/phpdotenv later, replace this block with:
-//   $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../backend');
-//   $dotenv->load();
-(function () {
-    $envFile = __DIR__ . '/../../backend/.env';
-    if (!file_exists($envFile)) {
-        http_response_code(500);
-        die(json_encode(['error' => '.env file not found']));
-    }
-    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if ($line === '' || str_starts_with($line, '#')) continue;
-        [$key, $value] = explode('=', $line, 2);
-        $key   = trim($key);
-        $value = trim($value, " \t\n\r\0\x0B\"'");
-        if (!isset($_ENV[$key])) {
-            $_ENV[$key]    = $value;
-            putenv("$key=$value");
+// ── Load dependencies + .env ─────────────────────────────
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoload)) {
+    // Composer installed — phpdotenv populates $_ENV and $_SERVER.
+    require_once $autoload;
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+} else {
+    // Fallback manual .env parser — used only until
+    // `composer install` is run inside backend/.
+    (function () {
+        $envFile = __DIR__ . '/../../backend/.env';
+        if (!file_exists($envFile)) {
+            http_response_code(500);
+            die(json_encode(['error' => '.env file not found']));
         }
-    }
-})();
+        $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '' || str_starts_with($line, '#')) continue;
+            [$key, $value] = explode('=', $line, 2);
+            $key   = trim($key);
+            $value = trim($value, " \t\n\r\0\x0B\"'");
+            if (!isset($_ENV[$key])) {
+                $_ENV[$key]    = $value;
+                putenv("$key=$value");
+            }
+        }
+    })();
+}
 
 // ── PDO singleton ─────────────────────────────────────────
 function pdo(): PDO
@@ -52,6 +59,13 @@ function pdo(): PDO
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
+
+    // MySQL SSL (Aiven) — enabled only when DB_SSL_CA is set.
+    // Uses the committed CA cert at backend/aiven-ca.pem.
+    if (!empty($_ENV['DB_SSL_CA'])) {
+        $options[PDO::MYSQL_ATTR_SSL_CA]                 = __DIR__ . '/../../backend/aiven-ca.pem';
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+    }
 
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
