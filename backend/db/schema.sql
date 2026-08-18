@@ -57,8 +57,7 @@ CREATE TABLE bookings (
   trip_score           FLOAT,
   schedule_id          CHAR(36),
   created_at           TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_bookings_client  FOREIGN KEY (client_id)   REFERENCES users(id)     ON DELETE CASCADE,
-  CONSTRAINT fk_bookings_sched   FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE SET NULL
+  CONSTRAINT fk_bookings_client  FOREIGN KEY (client_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- ── Booking ↔ Services (many-to-many) ───────────────────
@@ -101,6 +100,10 @@ CREATE TABLE schedules (
   created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_sched_team FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE
 );
+
+-- fk added here because schedules must exist before bookings can reference it
+ALTER TABLE bookings
+  ADD CONSTRAINT fk_bookings_sched FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE SET NULL;
 
 -- ── Schedule Stops (ordered jobs per schedule) ───────────
 CREATE TABLE schedule_stops (

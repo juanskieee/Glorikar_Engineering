@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 // ═══════════════════════════════════════════════════════════
 //  GLORIKAR — api/_bootstrap.php
 //  Shared setup for every API endpoint.
 //  Sets JSON headers, CORS, error handling.
 // ═══════════════════════════════════════════════════════════
 
-declare(strict_types=1);
+
 
 // ── Error display off (never leak stack traces) ───────────
 ini_set('display_errors', '0');
