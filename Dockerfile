@@ -27,7 +27,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN cd backend && composer install --no-dev --optimize-autoloader
 
 # Apache config — allow .htaccess overrides + show PHP errors temporarily
-RUN echo '<Directory /var/www/html>\n\
+RUN echo 'ServerName glorikar-engineering.onrender.com\n\
+<Directory /var/www/html>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\

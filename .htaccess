@@ -2,8 +2,6 @@
 #  GLORIKAR — root .htaccess (production reference)
 # ═══════════════════════════════════════════════════════════
 
-ServerName glorikar-engineering.onrender.com
-
 Options -Indexes
 ServerSignature Off
 
