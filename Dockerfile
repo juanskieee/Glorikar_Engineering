@@ -25,3 +25,18 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install PHP dependencies
 RUN cd backend && composer install --no-dev --optimize-autoloader
+
+# Apache config — allow .htaccess overrides + show PHP errors temporarily
+RUN echo '<Directory /var/www/html>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+    php_flag display_errors on\n\
+    php_value error_reporting 32767\n\
+</Directory>' > /etc/apache2/conf-available/glorikar.conf \
+&& a2enconf glorikar
+
+# Stream Apache error log to stdout so Render shows it in logs
+RUN ln -sf /dev/stderr /var/log/apache2/error.log
+
+EXPOSE 80
