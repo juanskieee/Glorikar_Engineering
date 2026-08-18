@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Backgrounds */
+  --bg:             #0F172A;
+  --surface:        #1E293B;
+  --surface-raised: #334155;
+
+  /* Brand */
+  --accent:     #0EA5E9;
+  --accent-dim: #0369A1;
+
+  /* Status */
+  --status-pending:     #F59E0B;
+  --status-scheduled:   #6366F1;
+  --status-en-route:    #0EA5E9;
+  --status-in-progress: #10B981;
+  --status-completed:   #22C55E;
+  --status-cancelled:   #EF4444;
+
+  /* Text */
+  --text-primary:   #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-disabled:  #475569;
+
+  /* Borders */
+  --border:       #334155;
+  --border-focus: #0EA5E9;
+
+  /* Utility */
+  --white:   #FFFFFF;
+  --black:   #000000;
+  --overlay: rgba(0,0,0,0.6);
+
+  /* Spacing (8pt grid) */
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  32px;
+  --sp-xxl: 48px;
+
+  /* Radius */
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-full: 999px;
+
+  /* Motion */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 200ms ease-out;
+
+  /* Nav */
+  --nav-height: 64px;
+  --sidebar-width: 220px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { color: var(--text-primary); }
+
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+
+img { display: block; max-width: 100%; }
+
+/* ── Typography utility classes ─────────────────────────── */
+.display-lg { font: 700 28px/34px 'Inter'; letter-spacing: -0.5px; }
+.display-sm { font: 700 22px/28px 'Inter'; letter-spacing: -0.3px; }
+.heading-lg { font: 600 18px/24px 'Inter'; }
+.heading-sm { font: 600 15px/20px 'Inter'; }
+.body-lg    { font: 400 15px/22px 'Inter'; }
+.body-sm    { font: 400 13px/18px 'Inter'; }
+.label-lg   { font: 500 14px/20px 'Inter'; letter-spacing: 0.1px; }
+.label-sm   { font: 500 12px/16px 'Inter'; letter-spacing: 0.2px; }
+.caption    { font: 400 11px/14px 'Inter'; letter-spacing: 0.3px; }
+
+.text-primary   { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-disabled  { color: var(--text-disabled); }
+.text-accent    { color: var(--accent); }

@@ -1,0 +1,15 @@
+# ── Secrets ──────────────────────────────────────────────
+backend/.env
+
+# ── PHP dependencies ──────────────────────────────────────
+vendor/
+composer.lock
+
+# ── Uploads ───────────────────────────────────────────────
+uploads/
+
+# ── OS / IDE junk ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
