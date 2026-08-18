@@ -98,7 +98,7 @@ if ($mapbox_token && $address !== '') {
 $id = bin2hex(random_bytes(16)); // UUID-like unique id
 $stmt = $pdo->prepare('
     INSERT INTO users (id, email, password_hash, full_name, phone, address, latitude, longitude, role)
-    VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, "client")
+    VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, \'client\')
 ');
 $stmt->execute([$email, $hash, $full_name, $phone ?: null, $address, $lat, $lng]);
 

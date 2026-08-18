@@ -44,7 +44,7 @@ if ($schedule) {
     $scheduleId = $schedule['id'];
 } else {
     $scheduleId = glorikar_uuid();
-    $pdo->prepare('INSERT INTO schedules (id, scheduled_date, team_id, status) VALUES (?, ?, ?, "draft")')
+    $pdo->prepare('INSERT INTO schedules (id, scheduled_date, team_id, status) VALUES (?, ?, ?, \'draft\')')
        ->execute([$scheduleId, $date, $teamId]);
 }
 
@@ -55,7 +55,7 @@ $stopOrder = (int)$stmt->fetch()['mx'] + 1;
 $pdo->prepare('INSERT INTO schedule_stops (id, schedule_id, booking_id, stop_order) VALUES (?, ?, ?, ?)')
    ->execute([glorikar_uuid(), $scheduleId, $bookingId, $stopOrder]);
 
-$pdo->prepare('UPDATE bookings SET schedule_id = ?, status = "scheduled" WHERE id = ?')
+$pdo->prepare('UPDATE bookings SET schedule_id = ?, status = \'scheduled\' WHERE id = ?')
    ->execute([$scheduleId, $bookingId]);
 
 respond([

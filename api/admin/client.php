@@ -17,7 +17,7 @@ $stmt = $pdo->prepare('
                 JOIN bookings b2 ON b2.id = i.booking_id
                 WHERE b2.client_id = u.id) AS total_spent
     FROM users u
-    WHERE u.id = ? AND u.role = "client"
+    WHERE u.id = ? AND u.role = 'client'
 ');
 $stmt->execute([$id]);
 $client = $stmt->fetch();

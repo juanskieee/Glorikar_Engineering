@@ -48,7 +48,7 @@ class SchedulingEngine
             FROM bookings b
             LEFT JOIN booking_services bs ON bs.booking_id = b.id
             LEFT JOIN services s          ON s.id = bs.service_id
-            WHERE b.status = "pending"
+            WHERE b.status = \'pending\'
               AND b.preferred_date_from <= :dt
               AND b.preferred_date_to   >= :dt
             GROUP BY b.id
@@ -126,7 +126,7 @@ class SchedulingEngine
 
             $this->pdo->prepare('
                 INSERT INTO schedules (id, scheduled_date, team_id, status, total_distance_km)
-                VALUES (?, ?, ?, "draft", ?)
+                VALUES (?, ?, ?, \'draft\', ?)
             ')->execute([$scheduleId, $date, $assignedTeam['id'], $totalDistKm]);
 
             // Insert stops + update bookings
@@ -141,7 +141,7 @@ class SchedulingEngine
                 ')->execute([$stopId, $scheduleId, $b['id'], $order + 1, $etaStr]);
 
                 $this->pdo->prepare('
-                    UPDATE bookings SET status = "scheduled", schedule_id = ? WHERE id = ?
+                    UPDATE bookings SET status = \'scheduled\', schedule_id = ? WHERE id = ?
                 ')->execute([$scheduleId, $b['id']]);
 
                 // Advance ETA by this job's hours + 30 min travel buffer

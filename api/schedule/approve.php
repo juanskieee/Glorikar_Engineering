@@ -21,6 +21,6 @@ $schedule = $stmt->fetch();
 if (!$schedule)                        respond_error('Schedule not found.', 404);
 if ($schedule['status'] !== 'draft')   respond_error('Only draft schedules can be approved.', 400, 'INVALID_STATUS');
 
-$pdo->prepare('UPDATE schedules SET status = "approved" WHERE id = ?')->execute([$id]);
+$pdo->prepare('UPDATE schedules SET status = \'approved\' WHERE id = ?')->execute([$id]);
 
 respond(['schedule' => ['id' => $id, 'status' => 'approved']]);

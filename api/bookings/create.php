@@ -85,7 +85,7 @@ $bookingId = bin2hex(random_bytes(16));
 $pdo->prepare('
     INSERT INTO bookings
         (id, client_id, status, preferred_date_from, preferred_date_to, address, latitude, longitude, notes)
-    VALUES (UUID(), ?, "pending", ?, ?, ?, ?, ?, ?)
+    VALUES (UUID(), ?, \'pending\', ?, ?, ?, ?, ?, ?)
 ')->execute([$SESSION_USER['id'], $dateFrom, $dateTo, $address, $lat, $lng, $notes ?: null]);
 
 // Fetch the new booking id

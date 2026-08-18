@@ -15,7 +15,7 @@ $stmt = $pdo->prepare('
     FROM bookings b
     JOIN schedules s ON s.id = b.schedule_id
     WHERE s.scheduled_date = ?
-      AND b.status NOT IN ("pending", "cancelled")
+      AND b.status NOT IN (\'pending\', \'cancelled\')
 ');
 $stmt->execute([$today]);
 $stats['today_jobs'] = (int)$stmt->fetch()['c'];
@@ -25,12 +25,12 @@ $stmt = $pdo->prepare('
     FROM bookings b
     JOIN schedules s ON s.id = b.schedule_id
     WHERE s.scheduled_date = ?
-      AND b.status = "completed"
+      AND b.status = \'completed\'
 ');
 $stmt->execute([$today]);
 $stats['completed_today'] = (int)$stmt->fetch()['c'];
 
-$stats['pending'] = (int)$pdo->query('SELECT COUNT(*) AS c FROM bookings WHERE status = "pending"')->fetch()['c'];
+$stats['pending'] = (int)$pdo->query('SELECT COUNT(*) AS c FROM bookings WHERE status = \'pending\'')->fetch()['c'];
 
 $stats['active_teams'] = (int)$pdo->query('SELECT COUNT(*) AS c FROM teams WHERE is_available = TRUE')->fetch()['c'];
 $stats['total_teams']  = (int)$pdo->query('SELECT COUNT(*) AS c FROM teams')->fetch()['c'];
@@ -62,7 +62,7 @@ $stmt = $pdo->query('
     SELECT b.id, b.preferred_date_from, b.address, u.full_name AS client_name
     FROM bookings b
     JOIN users u ON u.id = b.client_id
-    WHERE b.status = "pending"
+    WHERE b.status = \'pending\'
     ORDER BY b.preferred_date_from ASC
     LIMIT 10
 ');

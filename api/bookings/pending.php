@@ -18,7 +18,7 @@ $stmt = $pdo->query('
         u.email AS client_email
     FROM bookings b
     JOIN users u ON u.id = b.client_id
-    WHERE b.status = "pending"
+    WHERE b.status = \'pending\'
     ORDER BY b.created_at ASC
 ');
 $bookings = $stmt->fetchAll();

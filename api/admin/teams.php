@@ -18,7 +18,7 @@ function syncTeamMembers(PDO $pdo, string $teamId, array $names): void
 {
     $pdo->prepare('DELETE FROM team_members WHERE team_id = ?')->execute([$teamId]);
 
-    $find = $pdo->prepare('SELECT id FROM users WHERE full_name = ? AND role = "client" LIMIT 1');
+    $find = $pdo->prepare('SELECT id FROM users WHERE full_name = ? AND role = \'client\' LIMIT 1');
     $ins  = $pdo->prepare('INSERT INTO team_members (id, team_id, user_id, role_tag) VALUES (?, ?, ?, ?)');
 
     $i = 0;
