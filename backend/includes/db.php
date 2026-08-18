@@ -15,7 +15,9 @@ if (file_exists($autoload)) {
     // Composer installed — phpdotenv populates $_ENV and $_SERVER.
     require_once $autoload;
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-    $dotenv->load();
+    // safeLoad() does NOT throw when .env is absent (Render has no .env —
+    // all config comes from process env vars via the dashboard).
+    $dotenv->safeLoad();
 } else {
     // Fallback manual .env parser — used only until
     // `composer install` is run inside backend/.
@@ -38,6 +40,16 @@ if (file_exists($autoload)) {
             }
         }
     })();
+}
+
+// Backfill $_ENV from the process environment (Render has no .env file;
+// php.ini variables_order may not include 'E', so getenv() is authoritative).
+foreach (['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_SSL_CA',
+          'JWT_SECRET', 'MAPBOX_ACCESS_TOKEN', 'VAPID_PUBLIC_KEY', 'VAPID_PRIVATE_KEY',
+          'DEPOT_LAT', 'DEPOT_LNG', 'MIN_TRIP_SCORE', 'MAX_DAILY_HOURS'] as $k) {
+    if ((!isset($_ENV[$k]) || $_ENV[$k] === '') && ($v = getenv($k)) !== false) {
+        $_ENV[$k] = $v;
+    }
 }
 
 // ── PDO singleton ─────────────────────────────────────────
