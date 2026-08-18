@@ -1,5 +1,5 @@
 // ── Glorikar — PWA Service Worker ─────────────────────────
-const CACHE_NAME = 'glorikar-v1';
+const CACHE_NAME = 'glorikar-v2';
 
 const STATIC_ASSETS = [
   '/assets/css/theme.css',
