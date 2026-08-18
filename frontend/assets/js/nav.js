@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Register the service worker (PWA install + push).
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => { /* HTTPS required in production */ });
+    navigator.serviceWorker.register('/sw.js').catch(() => { /* HTTPS required in production */ });
   }
 
   document.querySelectorAll('[data-nav-link]').forEach(function (link) {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         await GL.post('/api/auth/logout.php', {});
       } catch (err) { /* ignore */ }
-      window.location.href = 'login.php';
+      window.location.href = '/login.php';
     });
   });
 

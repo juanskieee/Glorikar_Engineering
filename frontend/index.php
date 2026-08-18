@@ -9,9 +9,9 @@ require_once dirname(__DIR__) . '/backend/includes/helpers.php';
 start_session_secure();
 
 if (empty($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /login.php');
     exit;
 }
 
-header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin/dashboard.php' : 'client/home.php'));
+header('Location: ' . ($_SESSION['role'] === 'admin' ? '/admin/dashboard.php' : '/client/home.php'));
 exit;

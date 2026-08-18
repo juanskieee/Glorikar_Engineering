@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 /**
- * login.php — Login / Register (client role).
+ * login.php â€” Login / Register (client role).
  */
 
 require_once dirname(__DIR__) . '/backend/includes/env.php';
@@ -14,7 +14,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 // Already logged in? Go straight to the right area.
 if (!empty($_SESSION['user_id'])) {
-    header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin/dashboard.php' : 'client/home.php'));
+    header('Location: ' . ($_SESSION['role'] === 'admin' ? '/admin/dashboard.php' : '/client/home.php'));
     exit;
 }
 
@@ -26,19 +26,19 @@ $loginCsrf = $_SESSION['csrf_token'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title><?= e($pageTitle) ?> · Glorikar Engineering</title>
+  <title><?= e($pageTitle) ?> Â· Glorikar Engineering</title>
   <meta name="theme-color" content="#0F172A">
   <meta name="api-url" content="<?= e(api_url()) ?>">
   <meta name="csrf-token" content="<?= e($loginCsrf) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <script src="assets/js/config.js" defer></script>
-  <script src="assets/js/api.js" defer></script>
-  <script src="assets/js/auth.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <script src="/assets/js/config.js" defer></script>
+  <script src="/assets/js/api.js" defer></script>
+  <script src="/assets/js/auth.js" defer></script>
 </head>
 <body>
 <div class="auth-page">
@@ -87,7 +87,7 @@ $loginCsrf = $_SESSION['csrf_token'];
 
       <div class="field">
         <label class="field-label label-sm text-secondary" for="password">Password</label>
-        <input class="input" type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+        <input class="input" type="password" id="password" name="password" required autocomplete="current-password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
         <div class="field-error" id="pw-hint">At least 8 characters with letters and numbers.</div>
       </div>
 
@@ -101,7 +101,7 @@ $loginCsrf = $_SESSION['csrf_token'];
     </p>
 
     <p class="caption text-secondary mt-lg" style="text-align:center;">
-      Aircon services on demand · Quezon City &amp; Metro Manila
+      Aircon services on demand Â· Quezon City &amp; Metro Manila
     </p>
   </div>
 </div>

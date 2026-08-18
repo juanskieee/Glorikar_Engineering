@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const meta = document.querySelector('meta[name="csrf-token"]');
         if (meta) meta.content = res.csrf_token;
       }
-      window.location.href = role === 'admin' ? 'admin/dashboard.php' : 'client/home.php';
+      window.location.href = role === 'admin' ? '/admin/dashboard.php' : '/client/home.php';
     } catch (err) {
       if (errorsEl) {
         errorsEl.textContent = err.message;

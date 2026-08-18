@@ -48,9 +48,7 @@ GL.api = async function (path, opts = {}) {
     const message = (data && data.error) ? data.error : `Request failed (${res.status}).`;
     if (res.status === 401 && !path.startsWith('/api/auth/login')) {
       // Session expired — bounce to login.
-      const href = new URL(window.location.href);
-      href.search = '';
-      window.location.href = href.origin + href.pathname.replace(/[^/]*$/, '') + 'login.php?expired=1';
+      window.location.href = '/login.php?expired=1';
     }
     throw { status: res.status, message, data };
   }

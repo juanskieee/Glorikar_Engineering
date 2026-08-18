@@ -11,17 +11,17 @@ $navItems = [];
 
 if ($navRole === 'admin') {
     $navItems = [
-        ['href' => 'admin/dashboard.php',      'icon' => 'dashboard', 'label' => 'Dashboard'],
-        ['href' => 'admin/route-map.php',      'icon' => 'map',       'label' => 'Route Map'],
-        ['href' => 'admin/teams.php',          'icon' => 'users',     'label' => 'Teams'],
-        ['href' => 'shared/notifications.php', 'icon' => 'bell',      'label' => 'Notifications'],
+        ['href' => '/admin/dashboard.php',      'icon' => 'dashboard', 'label' => 'Dashboard'],
+        ['href' => '/admin/route-map.php',      'icon' => 'map',       'label' => 'Route Map'],
+        ['href' => '/admin/teams.php',          'icon' => 'users',     'label' => 'Teams'],
+        ['href' => '/shared/notifications.php', 'icon' => 'bell',      'label' => 'Notifications'],
     ];
 } else {
     $navItems = [
-        ['href' => 'client/home.php',          'icon' => 'home',      'label' => 'Home'],
-        ['href' => 'client/my-bookings.php',   'icon' => 'calendar',  'label' => 'My Bookings'],
-        ['href' => 'shared/notifications.php', 'icon' => 'bell',      'label' => 'Notifications'],
-        ['href' => 'shared/profile.php',       'icon' => 'user',      'label' => 'Profile'],
+        ['href' => '/client/home.php',          'icon' => 'home',      'label' => 'Home'],
+        ['href' => '/client/my-bookings.php',   'icon' => 'calendar',  'label' => 'My Bookings'],
+        ['href' => '/shared/notifications.php', 'icon' => 'bell',      'label' => 'Notifications'],
+        ['href' => '/shared/profile.php',       'icon' => 'user',      'label' => 'Profile'],
     ];
 }
 ?>

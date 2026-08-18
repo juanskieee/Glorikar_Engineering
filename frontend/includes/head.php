@@ -21,18 +21,18 @@ $csrf = $_SESSION['csrf_token'] ?? csrf_token();
   <meta name="api-url" content="<?= e(api_url()) ?>">
   <meta name="mapbox-token" content="<?= e(\Env::get('MAPBOX_ACCESS_TOKEN', '')) ?>">
   <meta name="csrf-token" content="<?= e($csrf) ?>">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
-  <link rel="icon" href="assets/icons/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+  <link rel="icon" href="/assets/icons/icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <script src="assets/js/config.js" defer></script>
-  <script src="assets/js/api.js" defer></script>
-  <script src="assets/js/nav.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <script src="/assets/js/config.js" defer></script>
+  <script src="/assets/js/api.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
 </head>
 <body>
 <div class="app">
