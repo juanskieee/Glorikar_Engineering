@@ -2,6 +2,8 @@
 #  GLORIKAR — root .htaccess (production reference)
 # ═══════════════════════════════════════════════════════════
 
+ServerName glorikar-engineering.onrender.com
+
 Options -Indexes
 ServerSignature Off
 
@@ -18,8 +20,3 @@ ServerSignature Off
 <FilesMatch "composer\.(json|lock)$">
   Require all denied
 </FilesMatch>
-
-# Force HTTPS (redirect any HTTP request to HTTPS)
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
