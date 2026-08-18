@@ -84,7 +84,7 @@ function pdo(): PDO
     } catch (PDOException $e) {
         http_response_code(500);
         // Never expose real DB error to client in production
-        error_log('DB connection failed: ' . $e->getMessage());
+        error_log("DB connection failed ($user@$host:$port/$name): " . $e->getMessage());
         die(json_encode(['error' => 'Database connection failed']));
     }
 
