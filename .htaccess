@@ -5,11 +5,6 @@
 Options -Indexes
 ServerSignature Off
 
-# Allow the PWA manifest (the generic .json deny rule below would otherwise block it)
-<Files "manifest.json">
-  Require all granted
-</Files>
-
 # Never serve sensitive / internal files directly
 <FilesMatch "\.(env|sql|log|json|md|gitignore|lock)$">
   Require all denied
@@ -18,3 +13,9 @@ ServerSignature Off
 <FilesMatch "composer\.(json|lock)$">
   Require all denied
 </FilesMatch>
+
+# Allow the PWA manifest (must come AFTER the deny rules — the last matching
+# section wins for Require in Apache 2.4)
+<Files "manifest.json">
+  Require all granted
+</Files>
