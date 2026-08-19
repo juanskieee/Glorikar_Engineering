@@ -177,18 +177,18 @@
       z-index: 0;
       overflow: hidden;
     }
-    .hero-video-wrap video {
+    .hero-video-wrap iframe {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
+      border: 0;
+      pointer-events: none; /* purely decorative — clicks pass through to page */
       transform: translate(-50%, -50%);
       /* Dim/cool the footage so white text stays readable */
       filter: brightness(0.55) saturate(1.05);
+      /* width/height set by JS below — source is portrait (9:16), so we
+         compute cover-fill sizing dynamically rather than relying on
+         object-fit (which iframes don't reliably support) */
     }
     /* Dark wash + fade to page background at the edges so the video
        reads as part of the page rather than a boxed-in clip */
@@ -890,19 +890,17 @@
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="hero-video-wrap">
-    <video
-      id="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      poster="/assets/video/montage_services-poster.jpg"
-      aria-hidden="true">
-      <source src="/assets/video/montage_services.mp4" type="video/mp4">
-      <track kind="captions" src="/assets/video/montage_services-captions.vtt" srclang="en" label="English" default>
-    </video>
+  <div class="hero-video-wrap" style="background:#0f172a;">
+    <iframe
+      id="hero-video-iframe"
+      src="https://player.vimeo.com/video/1219489297?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      title="montage_services"
+      aria-hidden="true"
+      tabindex="-1">
+    </iframe>
   </div>
   <div class="hero-video-overlay"></div>
   <div class="container">
@@ -1657,35 +1655,65 @@
   </div>
 </footer>
 
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script>
 (function () {
   var hero = document.getElementById('hero');
-  var video = document.getElementById('hero-video');
-  if (!hero || !video) return;
+  var wrap = document.querySelector('.hero-video-wrap');
+  var iframe = document.getElementById('hero-video-iframe');
+  if (!hero || !wrap || !iframe) return;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function fallbackToStatic() {
     hero.classList.add('no-video');
-    video.pause();
   }
 
   if (reduceMotion) {
-    // Respect the user's OS-level motion preference — show the poster
-    // frame (or original static hero background) instead of playing.
+    // Respect the user's OS-level motion preference — show the plain
+    // hero background instead of playing the montage.
     fallbackToStatic();
     return;
   }
 
-  // If the file is missing/unsupported, drop back to the plain hero
-  // background so the layout never breaks.
-  video.addEventListener('error', fallbackToStatic);
+  // Source clip is portrait (9:16). To fill a wide hero section without
+  // letterboxing, size the iframe up so it always covers the wrapper,
+  // then crop the overflow — same math as CSS background-size: cover,
+  // done in JS because iframes don't respect object-fit reliably.
+  var VIDEO_RATIO = 9 / 16; // width / height of the source video
 
-  // Some mobile browsers silently block autoplay even when muted; if
-  // playback doesn't start, fall back rather than showing a frozen frame.
-  var playPromise = video.play();
-  if (playPromise && typeof playPromise.catch === 'function') {
-    playPromise.catch(fallbackToStatic);
+  function resizeVideoBackground() {
+    var w = wrap.offsetWidth;
+    var h = wrap.offsetHeight;
+    if (!w || !h) return;
+    var containerRatio = w / h;
+    var targetW, targetH;
+    if (containerRatio > VIDEO_RATIO) {
+      // Wrapper is relatively wider than the clip — match width, let height overflow
+      targetW = w;
+      targetH = w / VIDEO_RATIO;
+    } else {
+      // Wrapper is relatively taller/narrower — match height, let width overflow
+      targetH = h;
+      targetW = h * VIDEO_RATIO;
+    }
+    iframe.style.width = targetW + 'px';
+    iframe.style.height = targetH + 'px';
+  }
+
+  resizeVideoBackground();
+  window.addEventListener('resize', resizeVideoBackground);
+  window.addEventListener('orientationchange', resizeVideoBackground);
+
+  // If the Vimeo player errors out (video removed, network blocked,
+  // etc.), fall back so the layout never breaks.
+  if (window.Vimeo && window.Vimeo.Player) {
+    try {
+      var player = new window.Vimeo.Player(iframe);
+      player.on('error', fallbackToStatic);
+    } catch (e) {
+      fallbackToStatic();
+    }
   }
 })();
 </script>
