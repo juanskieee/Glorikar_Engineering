@@ -357,22 +357,6 @@
       gap: var(--sp-md);
       flex-wrap: wrap;
     }
-    .hero-trust {
-      margin-top: var(--sp-xl);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--sp-lg);
-      flex-wrap: wrap;
-    }
-    .hero-trust-item {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-sm);
-      font: 500 13px/1 'Inter';
-      color: var(--text-secondary);
-    }
-    .hero-trust-item svg { color: var(--accent); flex-shrink: 0; }
 
     @media (max-width: 600px) {
       .hero-body { font-size: 15px; }
@@ -804,7 +788,6 @@
       border-radius: 999px;
       font: 500 11px/1 'Inter';
     }
-    .badge-scheduled { background: rgba(99,102,241,0.15); color: #6366F1; }
     .badge-enroute   { background: rgba(14,165,233,0.15); color: #0EA5E9; }
     .badge-completed { background: rgba(34,197,94,0.12); color: #22C55E; }
     .mock-row {
@@ -1138,123 +1121,6 @@
       .footer-bottom { padding: var(--sp-md) 0; }
     }
 
-    /* ── Reviews / Testimonials ────────────────────────────── */
-    .reviews-section {
-      padding: var(--sp-xxl) 0;
-    }
-    .reviews-bg {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .reviews-header {
-      text-align: center;
-      margin-bottom: var(--sp-xxl);
-    }
-    .reviews-label {
-      font: 500 11px/1 'Inter';
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: var(--sp-sm);
-    }
-    .reviews-title {
-      font: 500 clamp(22px, 5vw, 32px)/1.15 'Inter';
-      letter-spacing: -0.8px;
-      color: var(--text-primary);
-      margin-bottom: var(--sp-sm);
-    }
-    .reviews-sub {
-      font: 400 15px/1.6 'Inter';
-      color: var(--text-secondary);
-      margin: 0;
-    }
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--sp-md);
-    }
-    .review-card {
-      background: var(--surface-raised);
-      border: 0.5px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: var(--sp-lg);
-      display: flex;
-      flex-direction: column;
-      gap: var(--sp-sm);
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .review-card:hover {
-      border-color: rgba(14,165,233,0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    }
-    .stars {
-      display: flex;
-      gap: 3px;
-    }
-    .star {
-      color: var(--status-pending);
-      font-size: 15px;
-      line-height: 1;
-    }
-    .review-text {
-      font: 400 14px/1.65 'Inter';
-      color: var(--text-primary);
-      flex: 1;
-    }
-    .review-footer {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-md);
-      padding-top: var(--sp-sm);
-      border-top: 0.5px solid var(--border);
-    }
-    .avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--accent-glow);
-      border: 1px solid rgba(14,165,233,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font: 500 12px/1 'Inter';
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-    .reviewer-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .reviewer-name {
-      font: 500 13px/1 'Inter';
-      color: var(--text-primary);
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .reviewer-date {
-      font: 400 12px/1 'Inter';
-      color: var(--text-disabled);
-      margin: 2px 0 0;
-    }
-    .verified {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font: 500 11px/1 'Inter';
-      color: var(--status-completed);
-      margin-left: auto;
-    }
-    .verified svg {
-      flex-shrink: 0;
-    }
-    @media (max-width: 600px) {
-      .reviews-grid { grid-template-columns: 1fr; }
-    }
-
     /* ── Mobile typography scale ─────────────────────────── */
     @media (max-width: 600px) {
       .container { padding: 0 var(--sp-md); }
@@ -1265,7 +1131,6 @@
       .section-label { font-size: 10px; }
       .section-body { font-size: 14px; }
       .hero-body { font-size: 15px; }
-      .hero-trust-item { font-size: 12px; }
       .service-desc { font-size: 12px; }
       .service-book-link { font-size: 12px; }
       .how-step-title { font-size: 14px; }
@@ -1361,7 +1226,7 @@
   <div class="hero-video-wrap" style="background:#0f172a;">
     <iframe
       id="hero-video-iframe"
-      src="https://player.vimeo.com/video/1219496758?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+      src="https://player.vimeo.com/video/1219496758?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
@@ -1386,20 +1251,6 @@
           Book a service
         </a>
         <a href="#services" class="btn btn-ghost btn-lg">See services & pricing</a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Trained technicians
-        </div>
-        <div class="hero-trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Real-time job tracking
-        </div>
-        <div class="hero-trust-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Digital invoices
-        </div>
       </div>
     </div>
   </div>
@@ -1567,7 +1418,7 @@
     <div class="features-layout">
       <div>
         <div class="section-label">Why Glorikar</div>
-        <h2 class="section-title">Built for homeowners who don't want to chase their serviceman</h2>
+        <h2 class="section-title">No more chasing your serviceman</h2>
         <div class="features-list">
           <div class="feature-item">
             <div class="feature-icon-wrap" aria-hidden="true">
@@ -1587,16 +1438,6 @@
             <div>
               <div class="feature-title">Trained teams</div>
               <div class="feature-body">Smart dispatch matches you with the right local expert.</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon-wrap" aria-hidden="true">
-              <!-- receipt -->
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1.5L8 22l2-1.5L12 22l2-1.5L16 22l2-1.5L20 22V2l-2 1.5L16 2l-2 1.5L12 2l-2 1.5L8 2 6 3.5 4 2z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
-            </div>
-            <div>
-              <div class="feature-title">Digital invoices</div>
-              <div class="feature-body">Instant itemized receipt the moment the job is done.</div>
             </div>
           </div>
           <div class="feature-item">
@@ -1719,19 +1560,6 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Appreciate the polite technicians, would recommend to our friends. Service was fast, efficient and they left the area clean. Thank you.</div>
-        <div class="tcard-author">Roj Jimenez</div>
-        <div class="tcard-date">February 2025</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
         <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had — our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
         <div class="tcard-author">Julian Labuson</div>
         <div class="tcard-date">August 2024</div>
@@ -1745,74 +1573,9 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Great service and confident expertise while working, which only comes through a lot of experience. 10/10 would recommend, will be buying more units from them soon.</div>
-        <div class="tcard-author">Miguel Kaimo</div>
-        <div class="tcard-date">May 2024</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
         <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite — kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar — never ako nagsisi. Keep up the good work!</div>
         <div class="tcard-author">Angeline Sabrina</div>
         <div class="tcard-date">September 2023</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Very professional and accommodating — they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
-        <div class="tcard-author">Paulo Mercado</div>
-        <div class="tcard-date">May 2023</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">I highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed to be done and even fixed the swing of our AC. At first hesitant ako to get their service kasi way cheaper than others but they proved their worth. Will definitely contact again! 👍</div>
-        <div class="tcard-author">Cha Borbe-Ogalesco</div>
-        <div class="tcard-date">April 2023</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Good service, highly recommended. Friendly and accommodating staff. 👍</div>
-        <div class="tcard-author">Cleo Limquiaco Tan</div>
-        <div class="tcard-date">May 2025</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Thank you so much sir for the prompt service. Malamig na ulit ang room ko. ❄️</div>
-        <div class="tcard-author">Yvess Gaerards</div>
-        <div class="tcard-date">May 2025</div>
       </div>
 
       <!-- Duplicate set for seamless infinite loop -->
@@ -1877,19 +1640,6 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Appreciate the polite technicians, would recommend to our friends. Service was fast, efficient and they left the area clean. Thank you.</div>
-        <div class="tcard-author">Roj Jimenez</div>
-        <div class="tcard-date">February 2025</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
         <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had — our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
         <div class="tcard-author">Julian Labuson</div>
         <div class="tcard-date">August 2024</div>
@@ -1906,32 +1656,6 @@
         <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite — kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar — never ako nagsisi. Keep up the good work!</div>
         <div class="tcard-author">Angeline Sabrina</div>
         <div class="tcard-date">September 2023</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Very professional and accommodating — they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
-        <div class="tcard-author">Paulo Mercado</div>
-        <div class="tcard-date">May 2023</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">I highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed to be done and even fixed the swing of our AC. Will definitely contact again! 👍</div>
-        <div class="tcard-author">Cha Borbe-Ogalesco</div>
-        <div class="tcard-date">April 2023</div>
       </div>
 
     </div>
@@ -1973,20 +1697,11 @@
             </div>
             <div class="coverage-row">
               <div class="coverage-row-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <div>
-                <div class="coverage-row-title">Nightly <span>scheduling</span></div>
-                <div class="coverage-row-sub">Our engine assigns your visit automatically — no follow-up calls needed</div>
-              </div>
-            </div>
-            <div class="coverage-row">
-              <div class="coverage-row-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
               </div>
               <div>
                 <div class="coverage-row-title">₱350 <span>to start</span></div>
-                <div class="coverage-row-sub">Aircon cleaning from ₱350/unit — the most popular service we offer</div>
+                <div class="coverage-row-sub">Aircon cleaning from ₱350/unit</div>
               </div>
             </div>
           </div>
@@ -2018,7 +1733,7 @@
         </div>
         <div class="nav-brand-text" style="font-size:13px">Glorikar Engineering</div>
       </a>
-      <p style="margin-top:var(--sp-md)">Providing pawis-free, abot-kayang heating, ventilating, and air-conditioning services for every Juan.</p>
+      <p style="margin-top:var(--sp-md)">Pawis-free, abot-kayang aircon services for every Juan.</p>
     </div>
     <div>
       <div class="footer-col-title">Quick Links</div>
