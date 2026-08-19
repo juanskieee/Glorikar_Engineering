@@ -868,7 +868,7 @@
         <em>running perfectly</em>
       </h1>
       <p class="hero-body">
-        Cleaning, installation, repair, and inspection — handled by trained technicians. Book online in minutes, track your job in real time.
+        Cleaning, installation, repair, and inspection handled by trained technicians. Book online in minutes, track your job in real time.
       </p>
       <div class="hero-actions">
         <a href="/register.php" class="btn btn-primary btn-lg">
@@ -962,7 +962,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
         <div class="service-name">Inspection</div>
-        <div class="service-desc">Full system health check with a written report — ideal before purchasing a secondhand unit or before summer.</div>
+        <div class="service-desc">Full system health check with a written report. Ideal before purchasing a secondhand unit or before summer.</div>
         <div class="service-price">₱500 <span>/ unit</span></div>
         <a href="/register.php" class="service-book-link">
           Book now
@@ -991,7 +991,7 @@
           <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="review-text">Highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed and even fixed the swing of our door. At first hesitant to get their service but they're way cheaper than others — they proved their worth.</p>
+        <p class="review-text">Highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed and even fixed the swing of our door. At first hesitant to get their service but they're way cheaper than others and they proved their worth.</p>
         <div class="review-footer">
           <div class="avatar">IB</div>
           <div class="reviewer-info">
@@ -1057,7 +1057,7 @@
           <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="review-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</p>
+        <p class="review-text">Good job, highly recommended! Napakahusay ng mga technician, very professional at mababait. Keep it up!</p>
         <div class="review-footer">
           <div class="avatar">CN</div>
           <div class="reviewer-info">
@@ -1119,130 +1119,6 @@
 </section>
 
 <!-- ── How it works ──────────────────────────────────────── -->
-<section id="how-it-works" class="how-bg">
-  <div class="container">
-    <div style="text-align:center; margin-bottom: var(--sp-xxl)">
-      <div class="section-label" style="text-align:center">The process</div>
-      <h2 class="section-title" style="text-align:center">From booking to done</h2>
-      <p class="section-body" style="margin: 0 auto; text-align:center">No phone calls needed. Book from your phone, track the job live, get your invoice digitally.</p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step">
-        <div class="how-step-num">1</div>
-        <div class="how-step-title">Create an account & pick your service</div>
-        <div class="how-step-body">Select what you need, choose a preferred date window, and confirm your address. Takes under two minutes.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">2</div>
-        <div class="how-step-title">We schedule and dispatch</div>
-        <div class="how-step-body">Our system assigns the nearest available team within your date window. You get a notification when they're on the way.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">3</div>
-        <div class="how-step-title">Job done, invoice sent</div>
-        <div class="how-step-body">Once the technician marks the job complete, a digital invoice is generated and available in your account instantly.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Why us ─────────────────────────────────────────────── -->
-<section id="why-us">
-  <div class="container">
-    <div class="features-layout">
-      <div>
-        <div class="section-label">Why Glorikar</div>
-        <h2 class="section-title">Built for homeowners who don't want to chase their serviceman</h2>
-        <div class="features-list">
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <div class="feature-title">Real-time job tracking</div>
-              <div class="feature-body">See your booking status live — from Pending all the way to Completed. Know exactly when the technician is en route.</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <div class="feature-title">Trained service teams</div>
-              <div class="feature-body">Every team is assigned jobs matched to their location and workload — so you get the right technician, not just whoever picks up the phone.</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <div class="feature-title">Digital invoices, always</div>
-              <div class="feature-body">No paper receipts that get lost. Your invoice is in your account the moment the job is complete, with a clear breakdown of what was done.</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <div class="feature-title">Flexible date windows</div>
-              <div class="feature-body">Give us a range of dates that works for you, and our scheduler finds the earliest available slot — no back-and-forth needed.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Decorative mock booking card -->
-      <div class="features-visual">
-        <div class="mock-label">Your booking</div>
-        <div class="mock-booking">
-          <div class="mock-status">
-            <span class="mock-badge badge-enroute">En Route</span>
-          </div>
-          <div class="mock-row"><span>Service</span><b>Aircon Cleaning × 2</b></div>
-          <div class="mock-row" style="margin-top:6px"><span>Address</span><b>Dasmariñas, Cavite</b></div>
-          <div class="mock-row" style="margin-top:6px"><span>ETA</span><b style="color:#0EA5E9">~15 minutes</b></div>
-          <div class="mock-progress" style="margin-top:16px">
-            <div class="mock-progress-step done"></div>
-            <div class="mock-progress-step done"></div>
-            <div class="mock-progress-step done"></div>
-            <div class="mock-progress-step active"></div>
-            <div class="mock-progress-step"></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;margin-top:6px">
-            <span style="font:400 10px/1 Inter;color:var(--text-disabled)">Pending</span>
-            <span style="font:400 10px/1 Inter;color:var(--accent)">En Route</span>
-            <span style="font:400 10px/1 Inter;color:var(--text-disabled)">Done</span>
-          </div>
-        </div>
-
-        <div class="mock-label" style="margin-top:var(--sp-md)">Recent invoice</div>
-        <div class="mock-booking">
-          <div class="mock-row"><span>Aircon Cleaning × 3</span><b>₱1,050</b></div>
-          <div class="mock-row" style="margin-top:6px;padding-top:10px;border-top:1px solid var(--border)"><span>Total</span><b>₱1,050</b></div>
-          <div style="margin-top:10px"><span class="mock-badge badge-completed">Paid</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Testimonials ──────────────────────────────────────── -->
-<section id="testimonials">
-  <div class="container">
-    <div class="testimonials-header">
-      <div class="section-label">What customers say</div>
-      <h2 class="section-title">Real reviews from real clients</h2>
-      <p class="section-body">From Facebook recommendations — unedited, straight from the people we've served.</p>
-    </div>
-  </div>
-  <div class="testimonials-track-wrap">
-    <div class="testimonials-track" id="testimonials-track">
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
