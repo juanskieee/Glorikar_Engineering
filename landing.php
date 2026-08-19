@@ -209,7 +209,7 @@
     .hero {
       position: relative;
       padding: calc(var(--sp-xxl) * 1.5) 0 calc(var(--sp-xxl) * 2);
-      min-height: 72vh;
+      min-height: 65vh;
       overflow: hidden;
     }
 
@@ -442,7 +442,7 @@
     /* Photo banner */
     .service-media {
       position: relative;
-      height: 310px;
+      height: 280px;
       overflow: hidden;
       background: var(--surface-raised); /* shows while the image loads */
     }
@@ -495,7 +495,7 @@
     }
 
     @media (max-width: 600px) {
-      .service-media { height: 340px; }
+      .service-media { height: 260px; }
       .service-icon { width: 38px; height: 38px; }
       .service-body { padding: var(--sp-lg) var(--sp-md) var(--sp-md); }
       .service-name { font-size: 15px; }
