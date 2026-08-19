@@ -458,7 +458,8 @@
     .services-dot.active { background: var(--accent); width: 18px; }
 
     @media (max-width: 600px) {
-      .service-card { flex-basis: 88vw; max-width: 400px; }
+      .services-track { padding-left: var(--sp-md); padding-right: var(--sp-md); }
+      .service-card { flex-basis: calc(100vw - 2 * var(--sp-md)); max-width: none; }
       .services-controls { margin-top: var(--sp-md); }
     }
     .service-card {
@@ -768,7 +769,6 @@
       padding: var(--sp-xl);
       position: relative;
       overflow: hidden;
-      height: 100%;
     }
     .features-visual::after {
       content: '';
