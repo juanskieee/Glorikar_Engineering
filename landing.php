@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glorikar Engineering — Aircon Services</title>
+  <meta name="description" content="Professional aircon cleaning, installation, repair, and maintenance in Cavite and nearby areas. Book online in minutes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & tokens ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    :root {
+      --bg:             #0F172A;
+      --surface:        #1E293B;
+      --surface-raised: #334155;
+      --accent:         #0EA5E9;
+      --accent-dim:     #0369A1;
+      --accent-glow:    rgba(14,165,233,0.15);
+      --text-primary:   #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-disabled:  #475569;
+      --border:         #334155;
+      --white:          #FFFFFF;
+
+      --sp-xs:  4px;
+      --sp-sm:  8px;
+      --sp-md:  16px;
+      --sp-lg:  24px;
+      --sp-xl:  40px;
+      --sp-xxl: 80px;
+
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 24px;
+
+      --transition: 200ms ease-out;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Layout helpers ─────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 var(--sp-lg);
+    }
+
+    /* ── Buttons ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      padding: 12px 24px;
+      border-radius: var(--r-md);
+      font: 600 14px/1 'Inter';
+      cursor: pointer;
+      border: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: #38BDF8;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(14,165,233,0.35);
+      color: var(--white);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      background: var(--surface);
+      border-color: var(--text-secondary);
+      color: var(--text-primary);
+    }
+    .btn-lg { padding: 14px 28px; font-size: 15px; }
+
+    /* ── Nav ────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(15,23,42,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--accent);
+      border-radius: var(--r-sm);
+      display: grid;
+      place-content: center;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .nav-brand-text {
+      font: 700 15px/1 'Inter';
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+    .nav-brand-sub {
+      font: 400 11px/1 'Inter';
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-xl);
+      list-style: none;
+    }
+    .nav-links a {
+      font: 500 13px/1 'Inter';
+      color: var(--text-secondary);
+      transition: color var(--transition);
+      text-decoration: none;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta { display: flex; gap: var(--sp-sm); }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: var(--sp-xxl) 0 calc(var(--sp-xxl) * 1.2);
+      overflow: hidden;
+    }
+
+    /* Grid background — subtle cold lines */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    /* Glow orb behind headline */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(14,165,233,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.3);
+      border-radius: var(--r-xl);
+      padding: 6px 14px;
+      font: 500 12px/1 'Inter';
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-lg);
+    }
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font: 700 52px/1.1 'Inter';
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-lg);
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-body {
+      font: 400 17px/1.7 'Inter';
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto var(--sp-xl);
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+    }
+    .hero-trust {
+      margin-top: var(--sp-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-lg);
+      flex-wrap: wrap;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      font: 500 13px/1 'Inter';
+      color: var(--text-secondary);
+    }
+    .hero-trust-item svg { color: var(--accent); flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 36px; letter-spacing: -1px; }
+      .hero-body { font-size: 15px; }
+    }
+
+    /* ── Section shared ─────────────────────────────────── */
+    section { padding: var(--sp-xxl) 0; }
+    .section-label {
+      font: 600 11px/1 'Inter';
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--sp-md);
+    }
+    .section-title {
+      font: 700 36px/1.15 'Inter';
+      letter-spacing: -0.8px;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-md);
+    }
+    .section-body {
+      font: 400 15px/1.7 'Inter';
+      color: var(--text-secondary);
+      max-width: 540px;
+    }
+
+    /* ── Services ────────────────────────────────────────── */
+    .services-header {
+      margin-bottom: var(--sp-xl);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--sp-md);
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-xl) var(--sp-lg);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .service-card:hover {
+      border-color: rgba(14,165,233,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.25);
+      border-radius: var(--r-md);
+      display: grid;
+      place-content: center;
+      color: var(--accent);
+      margin-bottom: var(--sp-lg);
+    }
+    .service-name {
+      font: 600 16px/1 'Inter';
+      color: var(--text-primary);
+      margin-bottom: var(--sp-sm);
+    }
+    .service-desc {
+      font: 400 13px/1.6 'Inter';
+      color: var(--text-secondary);
+      margin-bottom: var(--sp-lg);
+    }
+    .service-price {
+      font: 700 22px/1 'Inter';
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .service-price span {
+      font: 400 12px/1 'Inter';
+      color: var(--text-secondary);
+      letter-spacing: 0;
+    }
+    .service-book-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: 500 13px/1 'Inter';
+      color: var(--accent);
+      margin-top: var(--sp-md);
+      transition: gap var(--transition);
+    }
+    .service-book-link:hover { gap: 10px; }
+
+    /* ── How it works ───────────────────────────────────── */
+    .how-bg {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-xl);
+      position: relative;
+    }
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: calc(33.33% + 12px);
+      right: calc(33.33% + 12px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent 50%, var(--accent));
+      opacity: 0.3;
+    }
+    .how-step { text-align: center; }
+    .how-step-num {
+      display: inline-grid;
+      place-content: center;
+      width: 44px;
+      height: 44px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.3);
+      border-radius: 50%;
+      font: 700 16px/1 'Inter';
+      color: var(--accent);
+      margin: 0 auto var(--sp-lg);
+    }
+    .how-step-title {
+      font: 600 15px/1 'Inter';
+      color: var(--text-primary);
+      margin-bottom: var(--sp-sm);
+    }
+    .how-step-body {
+      font: 400 13px/1.6 'Inter';
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .how-grid { grid-template-columns: 1fr; gap: var(--sp-xl); }
+      .how-grid::before { display: none; }
+    }
+
+    /* ── Why us / features ──────────────────────────────── */
+    .features-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-xxl);
+      align-items: center;
+    }
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-lg);
+      margin-top: var(--sp-xl);
+    }
+    .feature-item {
+      display: flex;
+      gap: var(--sp-md);
+    }
+    .feature-check {
+      width: 22px;
+      height: 22px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.3);
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-title {
+      font: 600 14px/1 'Inter';
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .feature-body {
+      font: 400 13px/1.6 'Inter';
+      color: var(--text-secondary);
+    }
+
+    /* Visual panel */
+    .features-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .features-visual::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(14,165,233,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .mock-booking {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-lg);
+      margin-bottom: var(--sp-md);
+    }
+    .mock-label {
+      font: 500 10px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-disabled);
+      margin-bottom: var(--sp-sm);
+    }
+    .mock-status {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      margin-bottom: var(--sp-md);
+    }
+    .mock-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font: 500 11px/1 'Inter';
+    }
+    .badge-scheduled { background: rgba(99,102,241,0.15); color: #6366F1; }
+    .badge-enroute   { background: rgba(14,165,233,0.15); color: #0EA5E9; }
+    .badge-completed { background: rgba(34,197,94,0.12); color: #22C55E; }
+    .mock-row {
+      display: flex;
+      justify-content: space-between;
+      font: 400 12px/1 'Inter';
+      color: var(--text-secondary);
+      padding: var(--sp-xs) 0;
+    }
+    .mock-row b { color: var(--text-primary); font-weight: 500; }
+    .mock-progress {
+      display: flex;
+      gap: 4px;
+      margin-top: var(--sp-md);
+    }
+    .mock-progress-step {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+    .mock-progress-step.done { background: var(--accent); }
+    .mock-progress-step.active { background: rgba(14,165,233,0.4); }
+
+    @media (max-width: 800px) {
+      .features-layout { grid-template-columns: 1fr; }
+      .features-visual { display: none; }
+    }
+
+    /* ── Coverage area ──────────────────────────────────── */
+    .coverage-bg {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-xxl);
+      align-items: center;
+    }
+    .area-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-sm);
+      margin-top: var(--sp-lg);
+    }
+    .area-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 6px 14px;
+      font: 500 12px/1 'Inter';
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 700px) {
+      .coverage-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CTA ─────────────────────────────────────────────── */
+    .cta-section {
+      padding: calc(var(--sp-xxl) * 1.2) 0;
+    }
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-xxl) var(--sp-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(14,165,233,0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-title {
+      font: 700 40px/1.1 'Inter';
+      letter-spacing: -1px;
+      margin-bottom: var(--sp-md);
+      position: relative;
+      z-index: 1;
+    }
+    .cta-body {
+      font: 400 15px/1.7 'Inter';
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 auto var(--sp-xl);
+      position: relative;
+      z-index: 1;
+    }
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      .cta-title { font-size: 28px; }
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: var(--sp-xl) 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-md);
+    }
+    .footer-links {
+      display: flex;
+      gap: var(--sp-lg);
+      list-style: none;
+    }
+    .footer-links a {
+      font: 400 13px/1 'Inter';
+      color: var(--text-disabled);
+      transition: color var(--transition);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy {
+      font: 400 12px/1 'Inter';
+      color: var(--text-disabled);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="nav-brand-text">Glorikar Engineering</div>
+        <div class="nav-brand-sub">Aircon Services</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#coverage">Coverage</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="/login.php" class="btn btn-ghost" style="padding: 8px 16px; font-size:13px;">Sign in</a>
+      <a href="/register.php" class="btn btn-primary" style="padding: 8px 16px; font-size:13px;">Book now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Professional Aircon Services · Cavite & Nearby Areas
+      </div>
+      <h1 class="hero-title">
+        Keep your aircon<br>
+        <em>running perfectly</em>
+      </h1>
+      <p class="hero-body">
+        Cleaning, installation, repair, and inspection — handled by trained technicians. Book online in minutes, track your job in real time.
+      </p>
+      <div class="hero-actions">
+        <a href="/register.php" class="btn btn-primary btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a service
+        </a>
+        <a href="#services" class="btn btn-ghost btn-lg">See services & pricing</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Trained technicians
+        </div>
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Real-time job tracking
+        </div>
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Digital invoices
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ─────────────────────────────────────────── -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">What we do</div>
+      <h2 class="section-title">Services & Pricing</h2>
+      <p class="section-body">Straightforward pricing, no hidden fees. Parts and materials billed separately when required.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <div class="service-name">Aircon Cleaning</div>
+        <div class="service-desc">Deep clean, filter wash, coil cleaning, and drain check. Keeps your unit running efficiently and smelling fresh.</div>
+        <div class="service-price">₱350 <span>/ unit</span></div>
+        <a href="/register.php" class="service-book-link">
+          Book now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M4.93 4.93l1.41 1.41M18.66 18.66l1.41 1.41M2 12h2m16 0h2M12 2v2m0 16v2"/></svg>
+        </div>
+        <div class="service-name">Installation</div>
+        <div class="service-desc">New unit mounting, refrigerant charging, and electrical wiring. We handle wall-mounted split-type and window units.</div>
+        <div class="service-price">₱2,500 <span>/ unit</span></div>
+        <a href="/register.php" class="service-book-link">
+          Book now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="service-name">Repair</div>
+        <div class="service-desc">Diagnostics and fault repair for units that aren't cooling, leaking, making noise, or tripping your breaker.</div>
+        <div class="service-price">₱800 <span>/ visit</span></div>
+        <a href="/register.php" class="service-book-link">
+          Book now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <div class="service-name">Relocation</div>
+        <div class="service-desc">Safe dismounting and reinstallation of your existing unit in a new location within the same or nearby premises.</div>
+        <div class="service-price">₱1,200 <span>/ unit</span></div>
+        <a href="/register.php" class="service-book-link">
+          Book now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="service-name">Inspection</div>
+        <div class="service-desc">Full system health check with a written report — ideal before purchasing a secondhand unit or before summer.</div>
+        <div class="service-price">₱500 <span>/ unit</span></div>
+        <a href="/register.php" class="service-book-link">
+          Book now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ──────────────────────────────────────── -->
+<section id="how-it-works" class="how-bg">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: var(--sp-xxl)">
+      <div class="section-label" style="text-align:center">The process</div>
+      <h2 class="section-title" style="text-align:center">From booking to done</h2>
+      <p class="section-body" style="margin: 0 auto; text-align:center">No phone calls needed. Book from your phone, track the job live, get your invoice digitally.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-title">Create an account & pick your service</div>
+        <div class="how-step-body">Select what you need, choose a preferred date window, and confirm your address. Takes under two minutes.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-title">We schedule and dispatch</div>
+        <div class="how-step-body">Our system assigns the nearest available team within your date window. You get a notification when they're on the way.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-title">Job done, invoice sent</div>
+        <div class="how-step-body">Once the technician marks the job complete, a digital invoice is generated and available in your account instantly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why us ─────────────────────────────────────────────── -->
+<section id="why-us">
+  <div class="container">
+    <div class="features-layout">
+      <div>
+        <div class="section-label">Why Glorikar</div>
+        <h2 class="section-title">Built for homeowners who don't want to chase their serviceman</h2>
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="feature-title">Real-time job tracking</div>
+              <div class="feature-body">See your booking status live — from Pending all the way to Completed. Know exactly when the technician is en route.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="feature-title">Trained service teams</div>
+              <div class="feature-body">Every team is assigned jobs matched to their location and workload — so you get the right technician, not just whoever picks up the phone.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="feature-title">Digital invoices, always</div>
+              <div class="feature-body">No paper receipts that get lost. Your invoice is in your account the moment the job is complete, with a clear breakdown of what was done.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="feature-title">Flexible date windows</div>
+              <div class="feature-body">Give us a range of dates that works for you, and our scheduler finds the earliest available slot — no back-and-forth needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative mock booking card -->
+      <div class="features-visual">
+        <div class="mock-label">Your booking</div>
+        <div class="mock-booking">
+          <div class="mock-status">
+            <span class="mock-badge badge-enroute">En Route</span>
+          </div>
+          <div class="mock-row"><span>Service</span><b>Aircon Cleaning × 2</b></div>
+          <div class="mock-row" style="margin-top:6px"><span>Address</span><b>Dasmariñas, Cavite</b></div>
+          <div class="mock-row" style="margin-top:6px"><span>ETA</span><b style="color:#0EA5E9">~15 minutes</b></div>
+          <div class="mock-progress" style="margin-top:16px">
+            <div class="mock-progress-step done"></div>
+            <div class="mock-progress-step done"></div>
+            <div class="mock-progress-step done"></div>
+            <div class="mock-progress-step active"></div>
+            <div class="mock-progress-step"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span style="font:400 10px/1 Inter;color:var(--text-disabled)">Pending</span>
+            <span style="font:400 10px/1 Inter;color:var(--accent)">En Route</span>
+            <span style="font:400 10px/1 Inter;color:var(--text-disabled)">Done</span>
+          </div>
+        </div>
+
+        <div class="mock-label" style="margin-top:var(--sp-md)">Recent invoice</div>
+        <div class="mock-booking">
+          <div class="mock-row"><span>Aircon Cleaning × 3</span><b>₱1,050</b></div>
+          <div class="mock-row" style="margin-top:6px;padding-top:10px;border-top:1px solid var(--border)"><span>Total</span><b>₱1,050</b></div>
+          <div style="margin-top:10px"><span class="mock-badge badge-completed">Paid</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Coverage ──────────────────────────────────────────── -->
+<section id="coverage" class="coverage-bg">
+  <div class="container">
+    <div class="coverage-grid">
+      <div>
+        <div class="section-label">Where we serve</div>
+        <h2 class="section-title">Cavite and nearby areas</h2>
+        <p class="section-body">Our teams are based across Cavite and can reach residential and commercial clients in the following areas. Not sure if we cover you? Create an account and check.</p>
+        <div class="area-list">
+          <span class="area-chip">Dasmariñas</span>
+          <span class="area-chip">Imus</span>
+          <span class="area-chip">General Trias</span>
+          <span class="area-chip">Bacoor</span>
+          <span class="area-chip">Kawit</span>
+          <span class="area-chip">Cavite City</span>
+          <span class="area-chip">Silang</span>
+          <span class="area-chip">Tagaytay</span>
+          <span class="area-chip">Carmona</span>
+          <span class="area-chip">Biñan, Laguna</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-md)">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
+          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">5 <span style="color:var(--accent)">services</span></div>
+          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Cleaning, Installation, Repair, Relocation, Inspection</div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
+          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">Nightly <span style="color:var(--accent)">scheduling</span></div>
+          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Our engine assigns your visit automatically — no follow-up calls needed</div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
+          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">₱350 <span style="color:var(--accent)">to start</span></div>
+          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Aircon cleaning from ₱350/unit — the most popular service we offer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <h2 class="cta-title">Ready to book?</h2>
+      <p class="cta-body">Create your account for free and schedule your first service in minutes. No calls, no waiting.</p>
+      <div class="cta-actions">
+        <a href="/register.php" class="btn btn-primary btn-lg">Create a free account</a>
+        <a href="/login.php" class="btn btn-ghost btn-lg">Sign in</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <a href="/" class="nav-brand" style="text-decoration:none">
+      <div class="nav-logo-mark" style="width:28px;height:28px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <div class="nav-brand-text" style="font-size:13px">Glorikar Engineering</div>
+    </a>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="/register.php">Book now</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Glorikar Engineering</span>
+  </div>
+</footer>
+
+</body>
+</html>
