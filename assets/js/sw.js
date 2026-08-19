@@ -72,7 +72,7 @@ self.addEventListener('push', (event) => {
   let data = {
     title: 'Glorikar',
     body: '',
-    icon: '/assets/icons/icon-192.png',
+    icon: '/assets/glorikar_logo.png',
     url: '/',
   };
 

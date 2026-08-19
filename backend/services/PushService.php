@@ -12,7 +12,7 @@ require_once __DIR__ . '/../includes/db.php';
 class PushService
 {
     private const SUBJECT = 'mailto:notify@glorikar.com';
-    private const ICON    = '/assets/icons/icon-192.png';
+    private const ICON    = '/assets/glorikar_logo.png';
 
     /**
      * Send a push notification to every active subscription of a user.

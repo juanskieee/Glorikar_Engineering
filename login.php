@@ -11,6 +11,8 @@ $csrfToken = get_csrf_token();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="<?php echo htmlspecialchars($csrfToken); ?>">
   <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/assets/icons/glorikar_logo.ico">
+  <link rel="apple-touch-icon" href="/assets/glorikar_logo.png">
   <meta name="theme-color" content="#0EA5E9">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -25,11 +27,8 @@ $csrfToken = get_csrf_token();
   <div class="auth-card">
 
     <div class="auth-logo">
-      <div class="auth-logo-mark">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/>
-          <path d="M22 12a10 10 0 0 0-3-7.1"/><path d="M17 2l5 5-5 5"/>
-        </svg>
+      <div class="auth-logo-mark" style="width: 48px; height: 48px; background: transparent; border-radius: var(--r-md); overflow: hidden;">
+        <img src="/assets/glorikar_logo.png" alt="Glorikar Engineering Logo" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
       <div class="display-sm mt-sm">Glorikar Engineering</div>
       <div class="body-sm text-secondary mt-xs">Aircon Services Portal</div>

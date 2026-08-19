@@ -7,6 +7,9 @@
   <meta name="description" content="Professional aircon cleaning, installation, repair, and maintenance in Cavite and nearby areas. Book online in minutes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/assets/icons/glorikar_logo.ico">
+  <link rel="apple-touch-icon" href="/assets/glorikar_logo.png">
+  <meta name="theme-color" content="#0EA5E9">
   <style>
     /* ── Reset & tokens ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -120,12 +123,16 @@
     .nav-logo-mark {
       width: 34px;
       height: 34px;
-      background: var(--accent);
       border-radius: var(--r-sm);
+      overflow: hidden;
+      flex-shrink: 0;
       display: grid;
       place-content: center;
-      color: var(--white);
-      flex-shrink: 0;
+    }
+    .nav-logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .nav-brand-text {
       font: 700 15px/1 'Inter';
@@ -653,9 +660,7 @@
   <div class="container nav-inner">
     <a href="/" class="nav-brand">
       <div class="nav-logo-mark">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/>
-        </svg>
+        <img src="/assets/glorikar_logo.png" alt="Glorikar Engineering Logo">
       </div>
       <div>
         <div class="nav-brand-text">Glorikar Engineering</div>
@@ -959,19 +964,36 @@
 <!-- ── Footer ────────────────────────────────────────────── -->
 <footer>
   <div class="container footer-inner">
-    <a href="/" class="nav-brand" style="text-decoration:none">
-      <div class="nav-logo-mark" style="width:28px;height:28px">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/>
-        </svg>
+    <div class="footer-brand">
+      <a href="/" class="nav-brand" style="text-decoration:none">
+        <div class="nav-logo-mark" style="width:28px;height:28px">
+          <img src="/assets/glorikar_logo.png" alt="Glorikar Engineering Logo">
+        </div>
+        <div class="nav-brand-text" style="font-size:13px">Glorikar Engineering</div>
+      </a>
+      <div class="footer-vision" style="margin-top:var(--sp-md); max-width: 280px;">
+        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin-bottom: var(--sp-xs);">Vision</p>
+        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Pawis-free Philippines for every Juan!</p>
+        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin: var(--sp-sm) 0 var(--sp-xs);">Mission</p>
+        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Abot-kayang Air-conditioning Sales & Services</p>
+        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin: var(--sp-sm) 0 var(--sp-xs);">Specialties</p>
+        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Heating, Ventilating & Air Conditioning Service</p>
       </div>
-      <div class="nav-brand-text" style="font-size:13px">Glorikar Engineering</div>
-    </a>
+    </div>
     <ul class="footer-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#how-it-works">How it works</a></li>
       <li><a href="/register.php">Book now</a></li>
     </ul>
+    <div class="footer-contact" style="text-align: right; min-width: 220px;">
+      <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin-bottom: var(--sp-xs);">Contact Us</p>
+      <p style="font: 400 12px/1.6 'Inter'; color: var(--text-secondary); margin-bottom: var(--sp-xs);">
+        <a href="tel:+639278180100" style="color: var(--text-secondary); text-decoration: none;">0927 818 0100</a>
+      </p>
+      <p style="font: 400 12px/1.6 'Inter'; color: var(--text-secondary);">
+        <a href="mailto:glorikar.engineering@gmail.com" style="color: var(--text-secondary); text-decoration: none;">glorikar.engineering@gmail.com</a>
+      </p>
+    </div>
     <span class="footer-copy">© 2026 Glorikar Engineering</span>
   </div>
 </footer>
