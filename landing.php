@@ -708,6 +708,124 @@
       font: 400 12px/1 'Inter';
       color: var(--text-disabled);
     }
+
+    /* ── Reviews / Testimonials ────────────────────────────── */
+    .reviews-section {
+      padding: var(--sp-xxl) 0;
+    }
+    .reviews-bg {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: var(--sp-xxl);
+    }
+    .reviews-label {
+      font: 500 11px/1 'Inter';
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--sp-sm);
+    }
+    .reviews-title {
+      font: 500 32px/1.15 'Inter';
+      letter-spacing: -0.8px;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-sm);
+    }
+    .reviews-sub {
+      font: 400 15px/1.6 'Inter';
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--sp-md);
+    }
+    .review-card {
+      background: var(--surface-raised);
+      border: 0.5px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-sm);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover {
+      border-color: rgba(14,165,233,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .stars {
+      display: flex;
+      gap: 3px;
+    }
+    .star {
+      color: var(--status-pending);
+      font-size: 15px;
+      line-height: 1;
+    }
+    .review-text {
+      font: 400 14px/1.65 'Inter';
+      color: var(--text-primary);
+      flex: 1;
+    }
+    .review-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      padding-top: var(--sp-sm);
+      border-top: 0.5px solid var(--border);
+    }
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 500 12px/1 'Inter';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .reviewer-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .reviewer-name {
+      font: 500 13px/1 'Inter';
+      color: var(--text-primary);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .reviewer-date {
+      font: 400 12px/1 'Inter';
+      color: var(--text-disabled);
+      margin: 2px 0 0;
+    }
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font: 500 11px/1 'Inter';
+      color: var(--status-completed);
+      margin-left: auto;
+    }
+    .verified svg {
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .reviews-title { font-size: 24px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -852,6 +970,150 @@
         </a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ── Reviews / Testimonials ─────────────────────────────── -->
+<section id="reviews" class="reviews-section reviews-bg">
+  <div class="container">
+    <div class="reviews-header">
+      <p class="reviews-label">What customers say</p>
+      <h2 class="reviews-title">Real reviews from real clients</h2>
+      <p class="reviews-sub">From Facebook recommendations — unedited, straight from the people we've served.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed and even fixed the swing of our door. At first hesitant to get their service but they're way cheaper than others — they proved their worth.</p>
+        <div class="review-footer">
+          <div class="avatar">IB</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Irene Borbe-Ogalesco</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Good service, highly recommended. Friendly and accommodating staff.</p>
+        <div class="review-footer">
+          <div class="avatar">CL</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Cleo Limquiaco Tan</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Thank you so much sir for the prompt service. Malamig na ulit ang room ko.</p>
+        <div class="review-footer">
+          <div class="avatar">YG</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Yvess Gaerards</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</p>
+        <div class="review-footer">
+          <div class="avatar">CN</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Criza Narido</p>
+            <p class="reviewer-date">August 2026</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Staffs are friendly and professional. Quick in responding to inquiries, punctual, and mabilis din nalinis yung 3 AC units. Malinis gumawa, hindi makalat. Highly recommended!</p>
+        <div class="review-footer">
+          <div class="avatar">HL</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Henson Lim</p>
+            <p class="reviewer-date">July 2026</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">All of their staffs are kind, professional and truly accommodating. Quick with polite response in our query and communication. We highly recommend their service by ninety-nine point nine percent.</p>
+        <div class="review-footer">
+          <div class="avatar">YM</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Ykcir Algire Malagamba</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
