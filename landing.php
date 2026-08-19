@@ -268,6 +268,7 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
+      background: #0f172a; /* dark base while the player loads */
     }
     .hero-video-wrap iframe {
       position: absolute;
@@ -278,11 +279,9 @@
       transform: translate(-50%, -50%);
       /* Dim/cool the footage so white text stays readable */
       filter: brightness(0.55) saturate(1.05);
-      /* width/height set by JS below — the source is 16:9 and the iframe is
-         always kept at a true 16:9 shape (rendered larger on phones so Vimeo
-         streams a sharper source), so we compute cover-fill sizing
-         dynamically rather than relying on object-fit (which iframes don't
-         reliably support) */
+      /* width/height set by JS below — the source is 16:9, so we compute
+         cover-fill sizing dynamically rather than relying on object-fit
+         (which iframes don't reliably support) */
     }
     /* Dark wash + fade to page background at the edges so the video
        reads as part of the page rather than a boxed-in clip */
@@ -1223,16 +1222,17 @@
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="hero-video-wrap" style="background:#0f172a;">
+  <div class="hero-video-wrap">
     <iframe
       id="hero-video-iframe"
-      src="https://player.vimeo.com/video/1219496758?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
+      src="https://player.vimeo.com/video/1219496758?background=1&autoplay=1&loop=1&muted=1&playsinline=1"
+      title="Glorikar Engineering background video"
       frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      title="Video Project"
-      aria-hidden="true"
-      tabindex="-1">
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      playsinline
+      webkit-playsinline
+      aria-hidden="true">
     </iframe>
   </div>
   <div class="hero-video-overlay"></div>
@@ -1578,87 +1578,7 @@
         <div class="tcard-date">September 2023</div>
       </div>
 
-      <!-- Duplicate set for seamless infinite loop -->
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</div>
-        <div class="tcard-author">Criza Narido</div>
-        <div class="tcard-date">August 2026</div>
       </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Staffs are friendly and professional. Quick in responding to inquiries, punctual, and mabilis din nalinis yung 3 AC units. Malinis gumawa, hindi makalat. Highly recommended! 💯</div>
-        <div class="tcard-author">Henson Lim</div>
-        <div class="tcard-date">July 2026</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">All of their staffs are kind, professional and truly accommodating. Quick with polite response in our query and communication. We highly recommend their service by ninety-nine point nine percent.</div>
-        <div class="tcard-author">Ykcir Algire Malagamba</div>
-        <div class="tcard-date">May 2025</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Highly recommended AC service. Maayos at mabait ang mga technicians at honest. From now on dito ko na ipapa-maintain ang AC ko. Thank you ulet 🙏</div>
-        <div class="tcard-author">Blair Robin</div>
-        <div class="tcard-date">May 2025</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had — our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
-        <div class="tcard-author">Julian Labuson</div>
-        <div class="tcard-date">August 2024</div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-stars">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite — kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar — never ako nagsisi. Keep up the good work!</div>
-        <div class="tcard-author">Angeline Sabrina</div>
-        <div class="tcard-date">September 2023</div>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -1883,8 +1803,13 @@
   });
 })();
 </script>
-<script src="https://player.vimeo.com/api/player.js"></script>
 <script>
+// ── Hero background video sizing ────────────────────────
+// The Vimeo embed is 16:9. We scale it up to cover the wrapper and let the
+// wrapper's overflow:hidden crop the sides/edges. No Vimeo player API is
+// used so Safari on iOS can never report a player error that would hide
+// the video — if autoplay is blocked the wrapper simply keeps its dark
+// base color behind the overlay instead of going blank.
 (function () {
   var hero = document.getElementById('hero');
   var wrap = document.querySelector('.hero-video-wrap');
@@ -1892,51 +1817,19 @@
   if (!hero || !wrap || !iframe) return;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function fallbackToStatic() {
-    hero.classList.add('no-video');
-  }
-
   if (reduceMotion) {
-    // Respect the user's OS-level motion preference — show the plain
-    // hero background instead of playing the montage.
-    fallbackToStatic();
+    hero.classList.add('no-video');
     return;
   }
 
-  // The Vimeo embed for this video is genuinely 16:9 landscape. If the
-  // iframe is sized to any other aspect ratio, Vimeo detects the mismatch
-  // and fills the leftover space with a blurred, stretched copy of the
-  // video, so the iframe itself always stays pinned to the real 16:9
-  // aspect below — we never resize it into a fake 9:16 shape. Instead we
-  // scale that 16:9 box up and let the wrapper's overflow:hidden crop the
-  // sides, which is what actually produces the "zoomed into a portrait
-  // frame" look on phones without ever triggering Vimeo's blur-fill.
   var VIDEO_W = 16, VIDEO_H = 9;
-
-  // Extra zoom applied only when the container is portrait (phones): the
-  // iframe is rendered larger than a plain "cover" crop and the wrapper's
-  // overflow:hidden crops the sides. The bigger player box also makes Vimeo
-  // stream a higher-resolution source, which keeps the zoomed-in crop sharp
-  // instead of blurry — no CSS transform on the iframe needed.
-  var PHONE_ZOOM = 1.5;
 
   function resizeVideoBackground() {
     var w = wrap.offsetWidth;
     var h = wrap.offsetHeight;
     if (!w || !h) return;
 
-    var scaleForWidth  = w / VIDEO_W;   // scale needed to cover by width
-    var scaleForHeight = h / VIDEO_H;   // scale needed to cover by height
-    var coverScale = Math.max(scaleForWidth, scaleForHeight);
-
-    // Cover-fill always wins on landscape/desktop so the frame reaches the
-    // left and right edges of the viewport (no side gaps on large screens).
-    // Only in portrait (phones) do we add the extra zoom.
-    var scale = coverScale === scaleForHeight
-      ? scaleForHeight * PHONE_ZOOM
-      : coverScale;
-
+    var scale = Math.max(w / VIDEO_W, h / VIDEO_H);
     iframe.style.width  = (VIDEO_W * scale) + 'px';
     iframe.style.height = (VIDEO_H * scale) + 'px';
   }
@@ -1944,17 +1837,6 @@
   resizeVideoBackground();
   window.addEventListener('resize', resizeVideoBackground);
   window.addEventListener('orientationchange', resizeVideoBackground);
-
-  // If the Vimeo player errors out (video removed, network blocked,
-  // etc.), fall back so the layout never breaks.
-  if (window.Vimeo && window.Vimeo.Player) {
-    try {
-      var player = new window.Vimeo.Player(iframe);
-      player.on('error', fallbackToStatic);
-    } catch (e) {
-      fallbackToStatic();
-    }
-  }
 })();
 </script>
 <script>
@@ -1996,22 +1878,31 @@
     card.appendChild(foot);
   });
 
-  // The cards are laid out as the unique set followed by a duplicate set,
-  // so wrapping at the first repeated card gives a seamless endless scroll.
-  var firstNames = cards.map(function (c) {
-    var a = c.querySelector('.tcard-author');
-    return a ? a.textContent.trim() : '';
-  });
-  var loopCount = firstNames.length;
-  for (var i = 1; i < firstNames.length; i++) {
-    if (firstNames[i] === firstNames[0]) { loopCount = i; break; }
-  }
+  // The DOM holds the single unique set of cards. The marquee auto-scrolls
+  // by exactly one set width and then wraps, so we clone the set until the
+  // track has enough runway that the wrap point is always reachable. This
+  // keeps the loop seamless on every screen width — a fixed 2x duplicate
+  // set stops on wide monitors because scrollLeft gets clamped below the
+  // wrap offset.
+  var loopCount = cards.length;
 
   function stepWidth() {
     var gap = parseFloat(window.getComputedStyle(track).columnGap || 16) || 16;
     return (cards[0] ? cards[0].getBoundingClientRect().width : 300) + gap;
   }
   var loopWidth = stepWidth() * loopCount;
+
+  // Clone the whole set until scrollWidth comfortably exceeds the viewport
+  // plus the wrap width, so the wrap check always fires before the clamp.
+  function ensureRunway() {
+    var target = track.clientWidth + loopWidth * 2;
+    while (track.scrollWidth < target) {
+      for (var i = 0; i < cards.length; i++) {
+        track.appendChild(cards[i].cloneNode(true));
+      }
+    }
+  }
+  ensureRunway();
 
   // Auto-scroll the marquee (~55px/s, same pace as the old ticker).
   var SPEED = 55;
@@ -2087,6 +1978,7 @@
 
   window.addEventListener('resize', function () {
     loopWidth = stepWidth() * loopCount;
+    ensureRunway();
   });
 
   start();
