@@ -234,27 +234,7 @@
       margin: 0 auto;
       text-align: center;
     }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--sp-sm);
-      background: var(--accent-glow);
-      border: 1px solid rgba(14,165,233,0.3);
-      border-radius: var(--r-xl);
-      padding: 6px 14px;
-      font: 500 12px/1 'Inter';
-      color: var(--accent);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: var(--sp-lg);
-    }
-    .hero-eyebrow-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
+    
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(0.7); }
@@ -893,7 +873,7 @@
   <div class="hero-video-wrap" style="background:#0f172a;">
     <iframe
       id="hero-video-iframe"
-      src="https://player.vimeo.com/video/1219489297?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479"
+      src="https://player.vimeo.com/video/1219496758?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479"
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture"
       referrerpolicy="strict-origin-when-cross-origin"
@@ -905,16 +885,12 @@
   <div class="hero-video-overlay"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot"></span>
-        Professional Aircon Services · Cavite & Nearby Areas
-      </div>
       <h1 class="hero-title">
         Keep your aircon<br>
         <em>running perfectly</em>
       </h1>
       <p class="hero-body">
-        Cleaning, installation, repair, and inspection — handled by trained technicians. Book online in minutes, track your job in real time.
+        Pawis-free Philippines for every Juan!. Abot-kayang Air-conditioning Sales & Services
       </p>
       <div class="hero-actions">
         <a href="/register.php" class="btn btn-primary btn-lg">
