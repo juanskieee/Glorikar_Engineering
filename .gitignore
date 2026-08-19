@@ -3,7 +3,9 @@ backend/.env
 
 # ── PHP dependencies ──────────────────────────────────────
 vendor/
+backend/vendor/
 composer.lock
+backend/composer.lock
 
 # ── Uploads ───────────────────────────────────────────────
 uploads/
