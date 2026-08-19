@@ -286,7 +286,7 @@
     }
 
     .hero-title {
-      font: 700 52px/1.1 'Inter';
+      font: 700 clamp(30px, 7vw, 52px)/1.1 'Inter';
       letter-spacing: -1.5px;
       color: var(--text-primary);
       margin-bottom: var(--sp-lg);
@@ -326,7 +326,6 @@
     .hero-trust-item svg { color: var(--accent); flex-shrink: 0; }
 
     @media (max-width: 600px) {
-      .hero-title { font-size: 36px; letter-spacing: -1px; }
       .hero-body { font-size: 15px; }
     }
 
@@ -341,7 +340,7 @@
       margin-bottom: var(--sp-md);
     }
     .section-title {
-      font: 700 36px/1.15 'Inter';
+      font: 700 clamp(24px, 5vw, 36px)/1.15 'Inter';
       letter-spacing: -0.8px;
       color: var(--text-primary);
       margin-bottom: var(--sp-md);
@@ -503,7 +502,7 @@
       .service-price { font-size: 19px; }
     }
     .service-price {
-      font: 700 22px/1 'Inter';
+      font: 700 clamp(18px, 3vw, 22px)/1 'Inter';
       color: var(--text-primary);
       letter-spacing: -0.5px;
     }
@@ -839,16 +838,33 @@
     }
 
     /* ── Coverage area ──────────────────────────────────── */
-    .coverage-bg {
+    /* Structural change from the old flat full-bleed stripe:
+       this is now an inset bordered panel (like a big card)
+       sitting on the page background, split into two panes by
+       a vertical rule, with the right side as a compact
+       icon-led list instead of three separate floating boxes. */
+    .coverage-bg { padding: var(--sp-xxl) 0; }
+    .coverage-panel {
+      position: relative;
       background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
     }
     .coverage-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-xxl);
-      align-items: center;
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .coverage-left {
+      padding: var(--sp-xxl);
+    }
+    .coverage-right {
+      padding: var(--sp-xxl);
+      border-left: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .area-list {
       display: flex;
@@ -857,51 +873,87 @@
       margin-top: var(--sp-lg);
     }
     .area-chip {
-      background: var(--bg);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--r-xl);
       padding: 6px 14px;
       font: 500 12px/1 'Inter';
       color: var(--text-secondary);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .area-chip:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+    /* right pane: icon-led rows separated by hairlines, not cards */
+    .coverage-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .coverage-row {
+      display: flex;
+      gap: var(--sp-md);
+      align-items: flex-start;
+      padding: var(--sp-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .coverage-row:first-child { padding-top: 0; }
+    .coverage-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .coverage-row-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-md);
+      background: rgba(14,165,233,0.10);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .coverage-row-title {
+      font: 600 15px/1.3 'Inter';
+      color: var(--text-primary);
+    }
+    .coverage-row-title span { color: var(--accent); }
+    .coverage-row-sub {
+      font: 400 13px/1.5 'Inter';
+      color: var(--text-secondary);
+      margin-top: 3px;
     }
 
     @media (max-width: 700px) {
       .coverage-grid { grid-template-columns: 1fr; }
+      .coverage-left { padding: var(--sp-xl); }
+      .coverage-right {
+        padding: var(--sp-xl);
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+    @media (max-width: 420px) {
+      .coverage-left, .coverage-right { padding: var(--sp-lg); }
+      .area-chip { font-size: 11px; padding: 5px 11px; }
+      .coverage-row-icon { width: 32px; height: 32px; }
+      .coverage-row-title { font-size: 14px; }
+      .coverage-row-sub { font-size: 12px; }
     }
 
     /* ── CTA ─────────────────────────────────────────────── */
     .cta-section {
-      padding: calc(var(--sp-xxl) * 1.2) 0;
-    }
-    .cta-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: var(--sp-xxl) var(--sp-lg);
-      text-align: center;
       position: relative;
       overflow: hidden;
-    }
-    .cta-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-    .cta-card::after {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 300px;
-      background: radial-gradient(ellipse, rgba(14,165,233,0.10), transparent 70%);
-      pointer-events: none;
+      padding: calc(var(--sp-xxl) * 1.2) 0;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% -30%, rgba(14,165,233,0.16), transparent 70%),
+        linear-gradient(180deg, var(--surface) 0%, var(--bg) 130%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
     .cta-title {
-      font: 700 40px/1.1 'Inter';
+      font: 700 clamp(26px, 6vw, 40px)/1.1 'Inter';
       letter-spacing: -1px;
       margin-bottom: var(--sp-md);
       position: relative;
@@ -926,36 +978,80 @@
     }
 
     @media (max-width: 600px) {
-      .cta-title { font-size: 28px; }
+      .cta-body { font-size: 14px; }
     }
 
     /* ── Footer ─────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: var(--sp-xl) 0;
+      padding-top: var(--sp-xxl);
     }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: var(--sp-md);
+    .footer-main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding-bottom: var(--sp-xl);
+    }
+    .footer-col-title {
+      font: 600 12px/1 'Inter';
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--sp-md);
+    }
+    .footer-about p {
+      font: 400 13px/1.7 'Inter';
+      color: var(--text-secondary);
+      max-width: 280px;
     }
     .footer-links {
       display: flex;
-      gap: var(--sp-lg);
+      flex-direction: column;
+      gap: 12px;
       list-style: none;
     }
     .footer-links a {
       font: 400 13px/1 'Inter';
-      color: var(--text-disabled);
+      color: var(--text-secondary);
       transition: color var(--transition);
       text-decoration: none;
     }
-    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-contact p {
+      font: 400 13px/1.6 'Inter';
+      color: var(--text-secondary);
+      margin-bottom: var(--sp-xs);
+    }
+    .footer-contact a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-contact a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid #2a3b5c;
+      padding: var(--sp-lg) 0;
+      text-align: center;
+    }
     .footer-copy {
       font: 400 12px/1 'Inter';
       color: var(--text-disabled);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .footer-main { grid-template-columns: 1fr 1fr; gap: var(--sp-xl) var(--sp-lg); }
+      .footer-about { grid-column: 1 / -1; }
+      .footer-about p { max-width: none; }
+    }
+    @media (max-width: 480px) {
+      .footer-main { grid-template-columns: 1fr; gap: var(--sp-lg); text-align: center; }
+      .footer-about { display: flex; flex-direction: column; align-items: center; }
+      .footer-about p { max-width: 320px; }
+      .footer-col-title { margin-bottom: var(--sp-sm); }
+      .footer-links { align-items: center; gap: 10px; }
+      .footer-contact p { text-align: center; }
+      .footer-bottom { padding: var(--sp-md) 0; }
     }
 
     /* ── Reviews / Testimonials ────────────────────────────── */
@@ -979,7 +1075,7 @@
       margin-bottom: var(--sp-sm);
     }
     .reviews-title {
-      font: 500 32px/1.15 'Inter';
+      font: 500 clamp(22px, 5vw, 32px)/1.15 'Inter';
       letter-spacing: -0.8px;
       color: var(--text-primary);
       margin-bottom: var(--sp-sm);
@@ -1072,8 +1168,51 @@
       flex-shrink: 0;
     }
     @media (max-width: 600px) {
-      .reviews-title { font-size: 24px; }
       .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Mobile typography scale ─────────────────────────── */
+    @media (max-width: 600px) {
+      .container { padding: 0 var(--sp-md); }
+      section { padding: var(--sp-xl) 0; }
+      body { font-size: 14px; }
+      .btn { font-size: 13px; padding: 10px 18px; }
+      .btn-lg { font-size: 14px; padding: 12px 22px; }
+      .section-label { font-size: 10px; }
+      .section-body { font-size: 14px; }
+      .hero-body { font-size: 15px; }
+      .hero-trust-item { font-size: 12px; }
+      .service-desc { font-size: 12px; }
+      .service-book-link { font-size: 12px; }
+      .how-step-title { font-size: 14px; }
+      .how-step-body { font-size: 12px; }
+      .feature-title { font-size: 13px; }
+      .feature-body { font-size: 12px; }
+      .tcard-text { font-size: 12px; }
+      .tcard-author { font-size: 12px; }
+      .tcard-date { font-size: 10px; }
+      .area-chip { font-size: 11px; padding: 5px 12px; }
+      .footer-about p { font-size: 12px; line-height: 1.6; }
+      .footer-col-title { font-size: 11px; letter-spacing: 1px; }
+      .footer-links a,
+      .footer-contact p { font-size: 12px; }
+      .footer-copy { font-size: 11px; }
+    }
+
+    /* ── Small phones (≤380px) ─────────────────────────────
+       The 600px scale above is still a bit large for narrow
+       phones (SE/mini-width devices); tighten the biggest,
+       most overflow-prone elements a touch further. */
+    @media (max-width: 380px) {
+      .container { padding: 0 var(--sp-sm); }
+      .hero-title { letter-spacing: -1px; }
+      .hero-body { font-size: 14px; }
+      .section-title { letter-spacing: -0.4px; }
+      .section-body { font-size: 13px; }
+      .btn { font-size: 12px; padding: 9px 16px; }
+      .coverage-row-title { font-size: 14px; }
+      .coverage-row-sub { font-size: 12px; }
+      .area-chip { font-size: 10.5px; padding: 5px 10px; }
     }
   </style>
 </head>
@@ -1695,36 +1834,55 @@
 <!-- ── Coverage ──────────────────────────────────────────── -->
 <section id="coverage" class="coverage-bg">
   <div class="container">
-    <div class="coverage-grid">
-      <div>
-        <div class="section-label">Where we serve</div>
-        <h2 class="section-title">Cavite and nearby areas</h2>
-        <p class="section-body">Our teams are based across Cavite and can reach residential and commercial clients in the following areas. Not sure if we cover you? Create an account and check.</p>
-        <div class="area-list">
-          <span class="area-chip">Dasmariñas</span>
-          <span class="area-chip">Imus</span>
-          <span class="area-chip">General Trias</span>
-          <span class="area-chip">Bacoor</span>
-          <span class="area-chip">Kawit</span>
-          <span class="area-chip">Cavite City</span>
-          <span class="area-chip">Silang</span>
-          <span class="area-chip">Tagaytay</span>
-          <span class="area-chip">Carmona</span>
-          <span class="area-chip">Biñan, Laguna</span>
+    <div class="coverage-panel">
+      <div class="coverage-grid">
+        <div class="coverage-left">
+          <div class="section-label">Where we serve</div>
+          <h2 class="section-title">Cavite and nearby areas</h2>
+          <p class="section-body">Serving residential and commercial clients across Cavite. Don't see your city? Sign up to check our expanding coverage.</p>
+          <div class="area-list">
+            <span class="area-chip">Dasmariñas</span>
+            <span class="area-chip">Imus</span>
+            <span class="area-chip">General Trias</span>
+            <span class="area-chip">Bacoor</span>
+            <span class="area-chip">Kawit</span>
+            <span class="area-chip">Cavite City</span>
+            <span class="area-chip">Silang</span>
+            <span class="area-chip">Tagaytay</span>
+            <span class="area-chip">Carmona</span>
+            <span class="area-chip">Biñan, Laguna</span>
+          </div>
         </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:var(--sp-md)">
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
-          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">5 <span style="color:var(--accent)">services</span></div>
-          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Cleaning, Installation, Repair, Relocation, Inspection</div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
-          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">Nightly <span style="color:var(--accent)">scheduling</span></div>
-          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Our engine assigns your visit automatically — no follow-up calls needed</div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
-          <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">₱350 <span style="color:var(--accent)">to start</span></div>
-          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Aircon cleaning from ₱350/unit — the most popular service we offer</div>
+        <div class="coverage-right">
+          <div class="coverage-list">
+            <div class="coverage-row">
+              <div class="coverage-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div>
+                <div class="coverage-row-title">5 <span>services</span></div>
+                <div class="coverage-row-sub">Cleaning, Installation, Repair, Relocation, Inspection</div>
+              </div>
+            </div>
+            <div class="coverage-row">
+              <div class="coverage-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <div class="coverage-row-title">Nightly <span>scheduling</span></div>
+                <div class="coverage-row-sub">Our engine assigns your visit automatically — no follow-up calls needed</div>
+              </div>
+            </div>
+            <div class="coverage-row">
+              <div class="coverage-row-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div>
+                <div class="coverage-row-title">₱350 <span>to start</span></div>
+                <div class="coverage-row-sub">Aircon cleaning from ₱350/unit — the most popular service we offer</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1734,50 +1892,43 @@
 <!-- ── CTA ───────────────────────────────────────────────── -->
 <section class="cta-section">
   <div class="container">
-    <div class="cta-card">
-      <h2 class="cta-title">Ready to book?</h2>
-      <p class="cta-body">Create your account for free and schedule your first service in minutes. No calls, no waiting.</p>
-      <div class="cta-actions">
-        <a href="/register.php" class="btn btn-primary btn-lg">Create a free account</a>
-        <a href="/login.php" class="btn btn-ghost btn-lg">Sign in</a>
-      </div>
+    <h2 class="cta-title">Ready to book?</h2>
+    <p class="cta-body">Create your account for free and schedule your first service in minutes. No calls, no waiting.</p>
+    <div class="cta-actions">
+      <a href="/register.php" class="btn btn-primary btn-lg">Create a free account</a>
+      <a href="/login.php" class="btn btn-ghost btn-lg">Sign in</a>
     </div>
   </div>
 </section>
 
 <!-- ── Footer ────────────────────────────────────────────── -->
 <footer>
-  <div class="container footer-inner">
-    <div class="footer-brand">
+  <div class="container footer-main">
+    <div class="footer-about">
       <a href="/" class="nav-brand" style="text-decoration:none">
         <div class="nav-logo-mark" style="width:28px;height:28px">
           <img src="/assets/glorikar_logo.png" alt="Glorikar Engineering Logo">
         </div>
         <div class="nav-brand-text" style="font-size:13px">Glorikar Engineering</div>
       </a>
-      <div class="footer-vision" style="margin-top:var(--sp-md); max-width: 280px;">
-        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin-bottom: var(--sp-xs);">Vision</p>
-        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Pawis-free Philippines for every Juan!</p>
-        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin: var(--sp-sm) 0 var(--sp-xs);">Mission</p>
-        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Abot-kayang Air-conditioning Sales & Services</p>
-        <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin: var(--sp-sm) 0 var(--sp-xs);">Specialties</p>
-        <p style="font: 400 12px/1.5 'Inter'; color: var(--text-secondary);">Heating, Ventilating & Air Conditioning Service</p>
-      </div>
+      <p style="margin-top:var(--sp-md)">Providing pawis-free, abot-kayang heating, ventilating, and air-conditioning services for every Juan.</p>
     </div>
-    <ul class="footer-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="/register.php">Book now</a></li>
-    </ul>
-    <div class="footer-contact" style="text-align: right; min-width: 220px;">
-      <p style="font: 500 12px/1.4 'Inter'; color: var(--accent); margin-bottom: var(--sp-xs);">Contact Us</p>
-      <p style="font: 400 12px/1.6 'Inter'; color: var(--text-secondary); margin-bottom: var(--sp-xs);">
-        <a href="tel:+639278180100" style="color: var(--text-secondary); text-decoration: none;">0927 818 0100</a>
-      </p>
-      <p style="font: 400 12px/1.6 'Inter'; color: var(--text-secondary);">
-        <a href="mailto:glorikar.engineering@gmail.com" style="color: var(--text-secondary); text-decoration: none;">glorikar.engineering@gmail.com</a>
-      </p>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="/register.php">Book now</a></li>
+      </ul>
     </div>
+    <div class="footer-contact">
+      <div class="footer-col-title">Contact Us</div>
+      <p><a href="tel:+639278180100">0927 818 0100</a></p>
+      <p><a href="mailto:glorikar.engineering@gmail.com">glorikar.engineering@gmail.com</a></p>
+      <p>Dasmariñas, Cavite</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
     <span class="footer-copy">© 2026 Glorikar Engineering</span>
   </div>
 </footer>

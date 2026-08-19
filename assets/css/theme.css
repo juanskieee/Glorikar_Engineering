@@ -102,3 +102,17 @@ img { display: block; max-width: 100%; }
 .text-secondary { color: var(--text-secondary); }
 .text-disabled  { color: var(--text-disabled); }
 .text-accent    { color: var(--accent); }
+
+/* ── Mobile typography scale ─────────────────────────────── */
+@media (max-width: 600px) {
+  body { font-size: 14px; }
+  .display-lg { font-size: 24px; }
+  .display-sm { font-size: 19px; }
+  .heading-lg { font-size: 16px; }
+  .heading-sm { font-size: 14px; }
+  .body-lg    { font-size: 14px; }
+  .body-sm    { font-size: 12px; }
+  .label-lg   { font-size: 13px; }
+  .label-sm   { font-size: 11px; }
+  .caption    { font-size: 10px; }
+}

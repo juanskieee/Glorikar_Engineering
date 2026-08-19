@@ -712,3 +712,35 @@ select.input { padding-right: var(--sp-xl); }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--surface-raised); border-radius: var(--r-full); }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+/* ── Mobile typography scale ─────────────────────────────── */
+@media (max-width: 600px) {
+  .btn { font-size: 13px; }
+  .btn-lg { font-size: 14px; }
+  .form-label { font-size: 12px; }
+  .input { font-size: 13px; }
+  .badge { font-size: 11px; }
+  .empty-state-title { font-size: 14px; }
+  .empty-state-body { font-size: 12px; }
+  .stat-card-label { font-size: 11px; }
+  .stat-card-value { font-size: 24px; }
+  .stat-card-sub { font-size: 11px; }
+  .list-row-title { font-size: 13px; }
+  .list-row-sub { font-size: 11px; }
+  .service-card-name { font-size: 13px; }
+  .service-card-desc { font-size: 11px; }
+  .service-card-price { font-size: 13px; }
+  .qty-val { font-size: 13px; }
+  .date-cell { font-size: 12px; }
+  .data-table th { font-size: 11px; }
+  .data-table td { font-size: 12px; }
+  .toast { font-size: 12px; }
+  .photo-upload-label { font-size: 12px; }
+  .invoice-row { font-size: 13px; }
+  .invoice-row.total { font-size: 14px; }
+  .notif-title { font-size: 13px; }
+  .notif-sub { font-size: 11px; }
+  .notif-time { font-size: 10px; }
+  .member-chip { font-size: 12px; }
+  .avatar { font-size: 11px; }
+}

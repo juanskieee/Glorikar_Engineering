@@ -60,6 +60,16 @@
   margin-top: 2px;
 }
 
+@media (max-width: 600px) {
+  .page-title { font-size: 16px; }
+  .page-subtitle { font-size: 12px; }
+  .nav-item-label { font-size: 9px; }
+  .sidebar-brand-name { font-size: 14px; }
+  .sidebar-user-name { font-size: 12px; }
+  .sidebar-user-email { font-size: 11px; }
+  .auth-card { padding: var(--sp-lg); }
+}
+
 /* ── Sticky bottom action bar ────────────────────────────── */
 .action-bar {
   position: fixed;
