@@ -873,7 +873,7 @@
   <div class="hero-video-wrap" style="background:#0f172a;">
     <iframe
       id="hero-video-iframe"
-      src="https://player.vimeo.com/video/1219496758?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479"
+      src="https://player.vimeo.com/video/1219498035?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479"
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture"
       referrerpolicy="strict-origin-when-cross-origin"
@@ -1508,17 +1508,11 @@
     return;
   }
 
-  // Two source clips: a portrait (9:16) clip for wide screens and a
-  // landscape (4:3) clip for phones. Pick per screen width, then size the
-  // iframe up so it always covers the wrapper and crop the overflow — same
-  // math as CSS background-size: cover, done in JS because iframes don't
-  // respect object-fit reliably.
-  var DESKTOP_SRC = 'https://player.vimeo.com/video/1219496758?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479';
-  var MOBILE_SRC = 'https://player.vimeo.com/video/1219498035?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479';
-  var DESKTOP_RATIO = 9 / 16; // width / height of the desktop clip
-  var MOBILE_RATIO = 4 / 3;   // width / height of the mobile clip
-  var mobileQuery = window.matchMedia('(max-width: 768px)');
-  var VIDEO_RATIO = DESKTOP_RATIO;
+  // Source clip is portrait (9:16). To fill a wide hero section without
+  // letterboxing, size the iframe up so it always covers the wrapper,
+  // then crop the overflow — same math as CSS background-size: cover,
+  // done in JS because iframes don't respect object-fit reliably.
+  var VIDEO_RATIO = 9 / 16; // width / height of the source video
 
   function resizeVideoBackground() {
     var w = wrap.offsetWidth;
@@ -1539,22 +1533,9 @@
     iframe.style.height = targetH + 'px';
   }
 
-  function applyVideoForViewport() {
-    var useMobile = mobileQuery.matches;
-    VIDEO_RATIO = useMobile ? MOBILE_RATIO : DESKTOP_RATIO;
-    var target = useMobile ? MOBILE_SRC : DESKTOP_SRC;
-    if (iframe.getAttribute('src') !== target) {
-      iframe.setAttribute('src', target);
-    }
-    resizeVideoBackground();
-  }
-
-  applyVideoForViewport();
-  window.addEventListener('resize', applyVideoForViewport);
-  window.addEventListener('orientationchange', applyVideoForViewport);
-  if (mobileQuery.addEventListener) {
-    mobileQuery.addEventListener('change', applyVideoForViewport);
-  }
+  resizeVideoBackground();
+  window.addEventListener('resize', resizeVideoBackground);
+  window.addEventListener('orientationchange', resizeVideoBackground);
 
   // If the Vimeo player errors out (video removed, network blocked,
   // etc.), fall back so the layout never breaks.
