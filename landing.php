@@ -996,150 +996,6 @@
   </div>
 </section>
 
-<!-- ── Reviews / Testimonials ─────────────────────────────── -->
-<section id="reviews" class="reviews-section reviews-bg">
-  <div class="container">
-    <div class="reviews-header">
-      <p class="reviews-label">What customers say</p>
-      <h2 class="reviews-title">Real reviews from real clients</h2>
-      <p class="reviews-sub">From Facebook recommendations — unedited, straight from the people we've served.</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">Highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed and even fixed the swing of our door. At first hesitant to get their service but they're way cheaper than others — they proved their worth.</p>
-        <div class="review-footer">
-          <div class="avatar">IB</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Irene Borbe-Ogalesco</p>
-            <p class="reviewer-date">May 2025</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">Good service, highly recommended. Friendly and accommodating staff.</p>
-        <div class="review-footer">
-          <div class="avatar">CL</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Cleo Limquiaco Tan</p>
-            <p class="reviewer-date">May 2025</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">Thank you so much sir for the prompt service. Malamig na ulit ang room ko.</p>
-        <div class="review-footer">
-          <div class="avatar">YG</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Yvess Gaerards</p>
-            <p class="reviewer-date">May 2025</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</p>
-        <div class="review-footer">
-          <div class="avatar">CN</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Criza Narido</p>
-            <p class="reviewer-date">August 2026</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">Staffs are friendly and professional. Quick in responding to inquiries, punctual, and mabilis din nalinis yung 3 AC units. Malinis gumawa, hindi makalat. Highly recommended!</p>
-        <div class="review-footer">
-          <div class="avatar">HL</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Henson Lim</p>
-            <p class="reviewer-date">July 2026</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars" aria-label="5 out of 5 stars">
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="review-text">All of their staffs are kind, professional and truly accommodating. Quick with polite response in our query and communication. We highly recommend their service by ninety-nine point nine percent.</p>
-        <div class="review-footer">
-          <div class="avatar">YM</div>
-          <div class="reviewer-info">
-            <p class="reviewer-name">Ykcir Algire Malagamba</p>
-            <p class="reviewer-date">May 2025</p>
-          </div>
-          <span class="verified">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── How it works ──────────────────────────────────────── -->
 <section id="how-it-works" class="how-bg">
   <div class="container">
@@ -1652,11 +1508,17 @@
     return;
   }
 
-  // Source clip is portrait (9:16). To fill a wide hero section without
-  // letterboxing, size the iframe up so it always covers the wrapper,
-  // then crop the overflow — same math as CSS background-size: cover,
-  // done in JS because iframes don't respect object-fit reliably.
-  var VIDEO_RATIO = 9 / 16; // width / height of the source video
+  // Two source clips: a portrait (9:16) clip for wide screens and a
+  // landscape (4:3) clip for phones. Pick per screen width, then size the
+  // iframe up so it always covers the wrapper and crop the overflow — same
+  // math as CSS background-size: cover, done in JS because iframes don't
+  // respect object-fit reliably.
+  var DESKTOP_SRC = 'https://player.vimeo.com/video/1219496758?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479';
+  var MOBILE_SRC = 'https://player.vimeo.com/video/1219498035?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&app_id=58479';
+  var DESKTOP_RATIO = 9 / 16; // width / height of the desktop clip
+  var MOBILE_RATIO = 4 / 3;   // width / height of the mobile clip
+  var mobileQuery = window.matchMedia('(max-width: 768px)');
+  var VIDEO_RATIO = DESKTOP_RATIO;
 
   function resizeVideoBackground() {
     var w = wrap.offsetWidth;
@@ -1677,9 +1539,22 @@
     iframe.style.height = targetH + 'px';
   }
 
-  resizeVideoBackground();
-  window.addEventListener('resize', resizeVideoBackground);
-  window.addEventListener('orientationchange', resizeVideoBackground);
+  function applyVideoForViewport() {
+    var useMobile = mobileQuery.matches;
+    VIDEO_RATIO = useMobile ? MOBILE_RATIO : DESKTOP_RATIO;
+    var target = useMobile ? MOBILE_SRC : DESKTOP_SRC;
+    if (iframe.getAttribute('src') !== target) {
+      iframe.setAttribute('src', target);
+    }
+    resizeVideoBackground();
+  }
+
+  applyVideoForViewport();
+  window.addEventListener('resize', applyVideoForViewport);
+  window.addEventListener('orientationchange', applyVideoForViewport);
+  if (mobileQuery.addEventListener) {
+    mobileQuery.addEventListener('change', applyVideoForViewport);
+  }
 
   // If the Vimeo player errors out (video removed, network blocked,
   // etc.), fall back so the layout never breaks.
