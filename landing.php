@@ -171,8 +171,11 @@
       padding: 0;
     }
     .nav-toggle svg { display: block; }
+    .nav-toggle .icon-close { display: none; }
+    .nav-toggle[aria-expanded="true"] .icon-burger { display: none; }
+    .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
     .nav-mobile {
-      display: none;
       position: absolute;
       top: 100%;
       left: 0;
@@ -181,19 +184,65 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: var(--sp-lg);
+      padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 220ms ease-out, transform 220ms ease-out, visibility 220ms;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      box-shadow: 0 24px 40px rgba(0,0,0,0.35);
     }
-    .nav-mobile.open { display: block; }
-    .nav-mobile a {
-      display: block;
-      padding: 12px 0;
-      font: 500 14px/1 'Inter';
-      color: var(--text-primary);
-      text-decoration: none;
+    .nav-mobile.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-mobile-header {
+      display: flex;
+      align-items: center;
+      padding: var(--sp-xs) var(--sp-sm) var(--sp-sm);
       border-bottom: 1px solid var(--border);
+      margin-bottom: var(--sp-sm);
     }
-    .nav-mobile a:last-child { border-bottom: none; }
-    .nav-mobile .btn { margin-top: 12px; justify-content: center; }
+    .nav-mobile-label {
+      font: 600 11px/1 'Inter';
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-disabled);
+    }
+    .nav-mobile a[data-nav-link] {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px var(--sp-sm);
+      font: 500 14px/1 'Inter';
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--r-md);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 200ms ease-out, transform 200ms ease-out, color var(--transition), background var(--transition);
+    }
+    .nav-mobile.open a[data-nav-link] { opacity: 1; transform: translateY(0); }
+    .nav-mobile.open a[data-nav-link]:nth-of-type(1) { transition-delay: 40ms; }
+    .nav-mobile.open a[data-nav-link]:nth-of-type(2) { transition-delay: 80ms; }
+    .nav-mobile.open a[data-nav-link]:nth-of-type(3) { transition-delay: 120ms; }
+    .nav-mobile.open a[data-nav-link]:nth-of-type(4) { transition-delay: 160ms; }
+    .nav-mobile a[data-nav-link]:hover {
+      color: var(--text-primary);
+      background: var(--surface);
+    }
+    .nav-mobile a[data-nav-link] svg { color: var(--accent); flex-shrink: 0; }
+    .nav-mobile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-sm);
+      margin-top: var(--sp-sm);
+      padding-top: var(--sp-md);
+      border-top: 1px solid var(--border);
+    }
+    .nav-mobile-actions .btn { justify-content: center; padding: 12px; }
 
     @media (max-width: 700px) {
       .nav-links { display: none; }
@@ -639,38 +688,76 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--sp-xxl);
-      align-items: center;
+      align-items: start;
     }
     .features-list {
       display: flex;
       flex-direction: column;
-      gap: var(--sp-xl);
-      margin-top: var(--sp-xl);
+      gap: 20px;
     }
     .feature-item {
       display: flex;
+      align-items: flex-start;
       gap: var(--sp-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-md);
+      transition: border-color var(--transition);
     }
-    .feature-check {
-      width: 22px;
-      height: 22px;
+    .feature-item:hover { border-color: rgba(14,165,233,0.35); }
+    .feature-icon-wrap {
+      width: 40px;
+      height: 40px;
       background: var(--accent-glow);
-      border: 1px solid rgba(14,165,233,0.3);
-      border-radius: 50%;
+      border: 1px solid rgba(14,165,233,0.25);
+      border-radius: var(--r-md);
       display: grid;
       place-content: center;
       color: var(--accent);
       flex-shrink: 0;
-      margin-top: 2px;
     }
     .feature-title {
-      font: 600 14px/1 'Inter';
+      font: 600 14px/1.2 'Inter';
       color: var(--text-primary);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .feature-body {
-      font: 400 13px/1.6 'Inter';
+      font: 400 12.5px/1.6 'Inter';
       color: var(--text-secondary);
+    }
+    .feature-body strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Mobile: single-col cards, hide the visual panel */
+    @media (max-width: 800px) {
+      .features-layout { grid-template-columns: 1fr; gap: var(--sp-xl); }
+      .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-sm);
+      }
+      .feature-item {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--sp-md);
+        padding: var(--sp-md);
+      }
+      .feature-icon-wrap {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+      }
+      .feature-title { font-size: 14px; }
+      .feature-body  { font-size: 13px; line-height: 1.55; }
+      .features-visual { display: none; }
+      .why-head .section-title {
+        font-size: 22px;
+        line-height: 1.25;
+        letter-spacing: -0.5px;
+      }
     }
 
     /* Visual panel */
@@ -681,6 +768,7 @@
       padding: var(--sp-xl);
       position: relative;
       overflow: hidden;
+      height: 100%;
     }
     .features-visual::after {
       content: '';
@@ -697,7 +785,6 @@
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       padding: var(--sp-lg);
-      margin-bottom: var(--sp-md);
     }
     .mock-label {
       font: 500 10px/1 'Inter';
@@ -742,10 +829,7 @@
     .mock-progress-step.done { background: var(--accent); }
     .mock-progress-step.active { background: rgba(14,165,233,0.4); }
 
-    @media (max-width: 800px) {
-      .features-layout { grid-template-columns: 1fr; }
-      .features-visual { display: none; }
-    }
+    /* features-layout mobile handled in the why-us block above */
 
     /* ── Testimonials ───────────────────────────────────── */
     .testimonials-header {
@@ -1241,15 +1325,34 @@
       <a href="/register.php" class="btn btn-primary" style="padding: 8px 16px; font-size:13px;">Book now</a>
     </div>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navMobile">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-burger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="#services">Services</a>
-    <a href="#how-it-works">How it works</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#coverage">Coverage</a>
-    <a href="/login.php" class="btn btn-ghost">Sign in</a>
+    <div class="nav-mobile-header">
+      <span class="nav-mobile-label">Menu</span>
+    </div>
+    <a href="#services" data-nav-link>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Services
+    </a>
+    <a href="#how-it-works" data-nav-link>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      How it works
+    </a>
+    <a href="#testimonials" data-nav-link>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Reviews
+    </a>
+    <a href="#coverage" data-nav-link>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Coverage
+    </a>
+    <div class="nav-mobile-actions">
+      <a href="/login.php" class="btn btn-ghost">Sign in</a>
+      <a href="/register.php" class="btn btn-primary">Book now</a>
+    </div>
   </div>
 </nav>
 
@@ -1467,39 +1570,43 @@
         <h2 class="section-title">Built for homeowners who don't want to chase their serviceman</h2>
         <div class="features-list">
           <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <!-- map pin / tracking -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <div class="feature-title">Real-time job tracking</div>
-              <div class="feature-body">Track your technician's live ETA so you are never left guessing or waiting around.</div>
+              <div class="feature-title">Real-time tracking</div>
+              <div class="feature-body">Live ETA — know exactly when your tech arrives.</div>
             </div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <!-- shield / trained -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div>
-              <div class="feature-title">Trained service teams</div>
-              <div class="feature-body">Our smart dispatch system instantly matches you with the right local expert for the job.</div>
+              <div class="feature-title">Trained teams</div>
+              <div class="feature-body">Smart dispatch matches you with the right local expert.</div>
             </div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <!-- receipt -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1.5L8 22l2-1.5L12 22l2-1.5L16 22l2-1.5L20 22V2l-2 1.5L16 2l-2 1.5L12 2l-2 1.5L8 2 6 3.5 4 2z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
             </div>
             <div>
-              <div class="feature-title">Digital invoices, always</div>
-              <div class="feature-body">Get instant, itemized digital receipts directly in your account the moment the job is done.</div>
+              <div class="feature-title">Digital invoices</div>
+              <div class="feature-body">Instant itemized receipt the moment the job is done.</div>
             </div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <!-- calendar -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
             <div>
-              <div class="feature-title">Flexible date windows</div>
-              <div class="feature-body">Choose a timeframe that fits your schedule, and we will automatically secure the earliest slot—no back-and-forth required.</div>
+              <div class="feature-title">Flexible scheduling</div>
+              <div class="feature-body">Pick a window, we auto-book the earliest slot for you.</div>
             </div>
           </div>
         </div>
@@ -2048,6 +2155,7 @@
   var toggle = document.querySelector('.nav-toggle');
   var panel = document.getElementById('navMobile');
   if (!toggle || !panel) return;
+
   toggle.addEventListener('click', function () {
     var open = panel.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
