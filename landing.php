@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glorikar Engineering | Aircon Services</title>
+  <title>Glorikar Engineering — Aircon Services</title>
   <meta name="description" content="Professional aircon cleaning, installation, repair, and maintenance in Cavite and nearby areas. Book online in minutes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -170,7 +170,7 @@
       overflow: hidden;
     }
 
-    /* Grid background: subtle cold lines */
+    /* Grid background — subtle cold lines */
     .hero::before {
       content: '';
       position: absolute;
@@ -709,6 +709,123 @@
       color: var(--text-disabled);
     }
 
+    /* ── Reviews / Testimonials ────────────────────────────── */
+    .reviews-section {
+      padding: var(--sp-xxl) 0;
+    }
+    .reviews-bg {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: var(--sp-xxl);
+    }
+    .reviews-label {
+      font: 500 11px/1 'Inter';
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--sp-sm);
+    }
+    .reviews-title {
+      font: 500 32px/1.15 'Inter';
+      letter-spacing: -0.8px;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-sm);
+    }
+    .reviews-sub {
+      font: 400 15px/1.6 'Inter';
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--sp-md);
+    }
+    .review-card {
+      background: var(--surface-raised);
+      border: 0.5px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-sm);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover {
+      border-color: rgba(14,165,233,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .stars {
+      display: flex;
+      gap: 3px;
+    }
+    .star {
+      color: var(--status-pending);
+      font-size: 15px;
+      line-height: 1;
+    }
+    .review-text {
+      font: 400 14px/1.65 'Inter';
+      color: var(--text-primary);
+      flex: 1;
+    }
+    .review-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      padding-top: var(--sp-sm);
+      border-top: 0.5px solid var(--border);
+    }
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid rgba(14,165,233,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 500 12px/1 'Inter';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .reviewer-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .reviewer-name {
+      font: 500 13px/1 'Inter';
+      color: var(--text-primary);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .reviewer-date {
+      font: 400 12px/1 'Inter';
+      color: var(--text-disabled);
+      margin: 2px 0 0;
+    }
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font: 500 11px/1 'Inter';
+      color: var(--status-completed);
+      margin-left: auto;
+    }
+    .verified svg {
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .reviews-title { font-size: 24px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -751,7 +868,7 @@
         <em>running perfectly</em>
       </h1>
       <p class="hero-body">
-        Cleaning, installation, repair, and inspection, handled by trained technicians. Book online in minutes and track your job in real time.
+        Cleaning, installation, repair, and inspection — handled by trained technicians. Book online in minutes, track your job in real time.
       </p>
       <div class="hero-actions">
         <a href="/register.php" class="btn btn-primary btn-lg">
@@ -845,7 +962,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
         <div class="service-name">Inspection</div>
-        <div class="service-desc">Full system health check with a written report. Ideal before purchasing a secondhand unit or before summer.</div>
+        <div class="service-desc">Full system health check with a written report — ideal before purchasing a secondhand unit or before summer.</div>
         <div class="service-price">₱500 <span>/ unit</span></div>
         <a href="/register.php" class="service-book-link">
           Book now
@@ -853,6 +970,150 @@
         </a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ── Reviews / Testimonials ─────────────────────────────── -->
+<section id="reviews" class="reviews-section reviews-bg">
+  <div class="container">
+    <div class="reviews-header">
+      <p class="reviews-label">What customers say</p>
+      <h2 class="reviews-title">Real reviews from real clients</h2>
+      <p class="reviews-sub">From Facebook recommendations — unedited, straight from the people we've served.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Highly recommend this team. Job well done! Affordable price yet great service. They explained what's needed and even fixed the swing of our door. At first hesitant to get their service but they're way cheaper than others — they proved their worth.</p>
+        <div class="review-footer">
+          <div class="avatar">IB</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Irene Borbe-Ogalesco</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Good service, highly recommended. Friendly and accommodating staff.</p>
+        <div class="review-footer">
+          <div class="avatar">CL</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Cleo Limquiaco Tan</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Thank you so much sir for the prompt service. Malamig na ulit ang room ko.</p>
+        <div class="review-footer">
+          <div class="avatar">YG</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Yvess Gaerards</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</p>
+        <div class="review-footer">
+          <div class="avatar">CN</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Criza Narido</p>
+            <p class="reviewer-date">August 2026</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">Staffs are friendly and professional. Quick in responding to inquiries, punctual, and mabilis din nalinis yung 3 AC units. Malinis gumawa, hindi makalat. Highly recommended!</p>
+        <div class="review-footer">
+          <div class="avatar">HL</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Henson Lim</p>
+            <p class="reviewer-date">July 2026</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">All of their staffs are kind, professional and truly accommodating. Quick with polite response in our query and communication. We highly recommend their service by ninety-nine point nine percent.</p>
+        <div class="review-footer">
+          <div class="avatar">YM</div>
+          <div class="reviewer-info">
+            <p class="reviewer-name">Ykcir Algire Malagamba</p>
+            <p class="reviewer-date">May 2025</p>
+          </div>
+          <span class="verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 8 12 12 8 8"/></svg>
+            Verified
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -899,7 +1160,7 @@
             </div>
             <div>
               <div class="feature-title">Real-time job tracking</div>
-              <div class="feature-body">See your booking status live, from Pending all the way to Completed. Know exactly when the technician is en route.</div>
+              <div class="feature-body">See your booking status live — from Pending all the way to Completed. Know exactly when the technician is en route.</div>
             </div>
           </div>
           <div class="feature-item">
@@ -908,7 +1169,7 @@
             </div>
             <div>
               <div class="feature-title">Trained service teams</div>
-              <div class="feature-body">Every team is assigned jobs matched to their location and workload, so you get the right technician, not just whoever picks up the phone.</div>
+              <div class="feature-body">Every team is assigned jobs matched to their location and workload — so you get the right technician, not just whoever picks up the phone.</div>
             </div>
           </div>
           <div class="feature-item">
@@ -926,7 +1187,7 @@
             </div>
             <div>
               <div class="feature-title">Flexible date windows</div>
-              <div class="feature-body">Give us a range of dates that works for you, and our scheduler finds the earliest available slot with no back-and-forth needed.</div>
+              <div class="feature-body">Give us a range of dates that works for you, and our scheduler finds the earliest available slot — no back-and-forth needed.</div>
             </div>
           </div>
         </div>
@@ -973,7 +1234,7 @@
     <div class="testimonials-header">
       <div class="section-label">What customers say</div>
       <h2 class="section-title">Real reviews from real clients</h2>
-      <p class="section-body">From Facebook recommendations, unedited and straight from the people we've served.</p>
+      <p class="section-body">From Facebook recommendations — unedited, straight from the people we've served.</p>
     </div>
   </div>
   <div class="testimonials-track-wrap">
@@ -987,7 +1248,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Good job, highly recommended! Napakahusay ng mga technician, very professional at mababait. Keep it up!</div>
+        <div class="tcard-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</div>
         <div class="tcard-author">Criza Narido</div>
         <div class="tcard-date">August 2026</div>
       </div>
@@ -1052,7 +1313,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had. Our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
+        <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had — our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
         <div class="tcard-author">Julian Labuson</div>
         <div class="tcard-date">August 2024</div>
       </div>
@@ -1078,7 +1339,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite, kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar, never ako nagsisi. Keep up the good work!</div>
+        <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite — kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar — never ako nagsisi. Keep up the good work!</div>
         <div class="tcard-author">Angeline Sabrina</div>
         <div class="tcard-date">September 2023</div>
       </div>
@@ -1091,7 +1352,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Very professional and accommodating, they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
+        <div class="tcard-text">Very professional and accommodating — they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
         <div class="tcard-author">Paulo Mercado</div>
         <div class="tcard-date">May 2023</div>
       </div>
@@ -1145,7 +1406,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Good job, highly recommended! Napakahusay ng mga technician, very professional at mababait. Keep it up!</div>
+        <div class="tcard-text">Good job, highly recommended! Napakahusay ng mga technician — very professional at mababait. Keep it up!</div>
         <div class="tcard-author">Criza Narido</div>
         <div class="tcard-date">August 2026</div>
       </div>
@@ -1210,7 +1471,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had. Our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
+        <div class="tcard-text">We've been booking appointments with Glorikar since last year and it's one of the best decisions our family had — our AC units are in safe hands. With reasonable rates, excellent maintenance and cleaning, plus tips on how to take care of your unit. Definitely a loyal customer here! 🙋‍♂️</div>
         <div class="tcard-author">Julian Labuson</div>
         <div class="tcard-date">August 2024</div>
       </div>
@@ -1223,7 +1484,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite, kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar, never ako nagsisi. Keep up the good work!</div>
+        <div class="tcard-text">Glorikar is highly recommended. Mabilis at madaling kausap sa chat, magalang. Mechanics are honest and polite — kahit iwan mo sila very trustworthy, informative kapag may tinanong ka. Kumpleto at malinis sila sa gamit. 3 years na akong tiwala sa Glorikar — never ako nagsisi. Keep up the good work!</div>
         <div class="tcard-author">Angeline Sabrina</div>
         <div class="tcard-date">September 2023</div>
       </div>
@@ -1236,7 +1497,7 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="tcard-text">Very professional and accommodating, they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
+        <div class="tcard-text">Very professional and accommodating — they really know their craft! Napakadaling kausap. We bought a new aircon and ang bilis lang nila nainstall. They even transferred our old aircon to the other room with cleaning pa.</div>
         <div class="tcard-author">Paulo Mercado</div>
         <div class="tcard-date">May 2023</div>
       </div>
@@ -1286,11 +1547,11 @@
         </div>
         <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
           <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">Nightly <span style="color:var(--accent)">scheduling</span></div>
-          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Our engine assigns your visit automatically, no follow-up calls needed</div>
+          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Our engine assigns your visit automatically — no follow-up calls needed</div>
         </div>
         <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg)">
           <div style="font:600 28px/1 Inter;color:var(--text-primary);letter-spacing:-0.5px">₱350 <span style="color:var(--accent)">to start</span></div>
-          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Aircon cleaning from ₱350/unit, the most popular service we offer</div>
+          <div style="font:400 13px/1 Inter;color:var(--text-secondary);margin-top:var(--sp-sm)">Aircon cleaning from ₱350/unit — the most popular service we offer</div>
         </div>
       </div>
     </div>
