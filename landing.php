@@ -1803,13 +1803,17 @@
   });
 })();
 </script>
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script>
-// ── Hero background video sizing ────────────────────────
+// ── Hero background video: cover-fill sizing + SDK autoplay ──
 // The Vimeo embed is 16:9. We scale it up to cover the wrapper and let the
-// wrapper's overflow:hidden crop the sides/edges. No Vimeo player API is
-// used so Safari on iOS can never report a player error that would hide
-// the video — if autoplay is blocked the wrapper simply keeps its dark
-// base color behind the overlay instead of going blank.
+// wrapper's overflow:hidden crop the sides/edges.
+//
+// Autoplay is driven through Vimeo's official Player SDK instead of relying
+// on query-string params alone: we explicitly mute + play() and inspect the
+// promise. If iOS blocks autoplay (e.g. Low Power Mode) we only log a
+// warning — the page never hides or swaps the video, so the hero just keeps
+// its dark base color behind the overlay instead of going blank.
 (function () {
   var hero = document.getElementById('hero');
   var wrap = document.querySelector('.hero-video-wrap');
@@ -1837,6 +1841,25 @@
   resizeVideoBackground();
   window.addEventListener('resize', resizeVideoBackground);
   window.addEventListener('orientationchange', resizeVideoBackground);
+
+  // Start playback via the SDK once the embed is ready. `setMuted(true)` is
+  // what tells iOS autoplay is allowed — `setVolume(0)` alone is treated as
+  // unmuted by some browsers and can still be blocked.
+  if (window.Vimeo && window.Vimeo.Player) {
+    try {
+      var player = new window.Vimeo.Player(iframe);
+      player.ready().then(function () {
+        player.setMuted(true);
+        return player.play();
+      }).catch(function (err) {
+        // Autoplay was prevented by iOS (e.g. Low Power Mode) — surface it
+        // in the console only; do NOT swap in a fallback or blank the hero.
+        console.warn('Autoplay prevented on iOS:', err && err.name);
+      });
+    } catch (e) {
+      console.warn('Vimeo SDK init failed:', e);
+    }
+  }
 })();
 </script>
 <script>
